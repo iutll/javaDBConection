@@ -35,7 +35,7 @@ public class persona extends javax.swing.JFrame {
             con=(Connection) DriverManager.getConnection(URL,USERNAME,PASSWORD);
            JOptionPane.showMessageDialog(null,"Conectado a la base de datos :D");
         } catch (Exception e) {
-            System.err.println("Error:" + e);
+          JOptionPane.showMessageDialog(null,"Esta dando error mano" + e);
         }
       
      return con;
