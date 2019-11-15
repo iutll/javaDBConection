@@ -14,9 +14,8 @@ public class Publicacion extends JPanel implements ActionListener {
     
     //--------Atributos Globales----------
    private JButton BB,BAnadir,BGuardar,BModificar,BLimpiar,BEliminar;
-   private JTextField txtBp,txtUsu,txtTitle,txtFecha,txtPubli;
-   private JTextArea ACont; 
-   private JComboBox Red=new JComboBox();
+   private JTextField txtBp,txtUsu,txtTitle,txtFecha;
+   private JTextArea ACont;
     //------------------------------------
     
      public Publicacion(){
@@ -35,7 +34,7 @@ public class Publicacion extends JPanel implements ActionListener {
       title.setFont(new Font("Dyuthi",Font.ITALIC, 20));
       add(title);
       
-      JLabel BP=new JLabel("Ingrese Cedula", SwingConstants.CENTER);
+      JLabel BP=new JLabel("C.I o Nombre", SwingConstants.CENTER);
       BP.setForeground(Color.BLACK);
       BP.setBounds(440, 30, 150, 40);
       BP.setFont(new Font("Dyuthi",Font.ITALIC, 16));
@@ -58,12 +57,6 @@ public class Publicacion extends JPanel implements ActionListener {
       Cont.setBounds(5, 115, 100, 40);
       Cont.setFont(new Font("Dyuthi",Font.ITALIC, 17));
       add(Cont);
-      
-      JLabel Publi=new JLabel("Publicar en:", SwingConstants.CENTER);
-      Publi.setForeground(Color.BLACK);
-      Publi.setBounds(5, 250, 100, 40);
-      Publi.setFont(new Font("Dyuthi",Font.ITALIC, 17));
-      add(Publi);
       
       JLabel Fecha=new JLabel("Fecha:", SwingConstants.CENTER);
       Fecha.setForeground(Color.BLACK);
@@ -99,14 +92,6 @@ public class Publicacion extends JPanel implements ActionListener {
       ACont.setEditable(false);
       add(ACont);
       
-            //----------->>>>>>>>>Lista Desplegable<<<<<<<<<<<------------
-      String[] Redes= {"Seleccione","Facebook","Instagram","Twitter"};
-      
-      Red=new JComboBox(Redes);
-      Red.setBounds(120, 260, 140, 30);
-      Red.setSelectedItem("Seleccione"); //Selecciona el Primer Obj Mostrado
-      add(Red);
-      
       //----------->>>>>>>>>Botones<<<<<<<<<<<------------
       BB = new JButton("Buscar");
       BB.setBounds(470, 90, 100, 25);
@@ -120,7 +105,7 @@ public class Publicacion extends JPanel implements ActionListener {
       BAnadir.addActionListener(this);
       add(BAnadir);
       
-      BGuardar = new JButton("Publicar");
+      BGuardar = new JButton("Guardar");
       BGuardar.setBounds(130, 410, 100, 30);
       BGuardar.setEnabled(true);
       BGuardar.addActionListener(this);
@@ -139,7 +124,7 @@ public class Publicacion extends JPanel implements ActionListener {
       add(BLimpiar);
       
       BEliminar = new JButton("Eliminar");
-      BEliminar.setBounds(480, 410, 100, 30);
+      BEliminar.setBounds(490, 410, 100, 30);
       BEliminar.setEnabled(true);
       BEliminar.addActionListener(this);
       add(BEliminar);
