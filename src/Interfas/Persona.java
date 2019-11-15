@@ -34,7 +34,7 @@ public class Persona extends JPanel implements ActionListener {
       title.setFont(new Font("Dyuthi",Font.ITALIC, 20));
       add(title);
     
-      JLabel Usu=new JLabel("-> Nombre Completo:");
+      JLabel Usu=new JLabel("-> Usuario:");
       Usu.setForeground(Color.BLACK);
       Usu.setBounds(20, 50, 150, 50);
       Usu.setFont(new Font("Dyuthi",Font.ITALIC, 17));
@@ -66,7 +66,7 @@ public class Persona extends JPanel implements ActionListener {
       
       //----------->>>>>>>>>Cajas de Texto<<<<<<<<<<<------------  
       txtUsu = new JTextField();
-      txtUsu.setBounds(175, 65, 165, 20);
+      txtUsu.setBounds(100, 65, 200, 20);
       add(txtUsu);
       
       txtMail = new JTextField();

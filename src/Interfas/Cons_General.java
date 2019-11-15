@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;*/
 public class Cons_General extends JPanel implements ActionListener{
     
     //--------Atributos Globales----------
-   private JButton BBg;
-   private JTextField txtBg;
+   private JButton BUsu,BPub,BPag;
+   private JTextField txtUsu,txtPub,txtPag;
    private JTextArea AreaImpr;
     //------------------------------------
     
@@ -59,26 +59,55 @@ public class Cons_General extends JPanel implements ActionListener{
       title.setFont(new Font("Dyuthi",Font.ITALIC, 20));
       add(title);
       
+      JLabel Usu=new JLabel("Tabla Usuario", SwingConstants.CENTER);
+      Usu.setForeground(Color.BLACK);
+      Usu.setBounds(0, 40, 150, 50);
+      Usu.setFont(new Font("Dyuthi",Font.ITALIC, 17));
+      add(Usu);
       
-      JLabel Pub=new JLabel("C.I o Nombre", SwingConstants.CENTER);
+      JLabel Pub=new JLabel("Tabla Publicación", SwingConstants.CENTER);
       Pub.setForeground(Color.BLACK);
       Pub.setBounds(220, 40, 150, 50);
       Pub.setFont(new Font("Dyuthi",Font.ITALIC, 17));
       add(Pub);
       
-        //----------->>>>>>>>>Cajas de Texto<<<<<<<<<<<------------ 
-      txtBg = new JTextField();
-      txtBg.setBounds(230, 75, 130, 20);
-      add(txtBg);
+      JLabel Pag=new JLabel("Tabla Pagina", SwingConstants.CENTER);
+      Pag.setForeground(Color.BLACK);
+      Pag.setBounds(450, 40, 150, 50);
+      Pag.setFont(new Font("Dyuthi",Font.ITALIC, 17));
+      add(Pag);
+      
+        //----------->>>>>>>>>Cajas de Texto<<<<<<<<<<<------------  
+      txtUsu = new JTextField();
+      txtUsu.setBounds(15, 75, 130, 20);
+      add(txtUsu);
+      
+      txtPub = new JTextField();
+      txtPub.setBounds(230, 75, 130, 20);
+      add(txtPub);
+      
+      txtPag = new JTextField();
+      txtPag.setBounds(460, 75, 130, 20);
+      add(txtPag);
       
         //----------->>>>>>>>>Botones<<<<<<<<<<<------------
+      BUsu = new JButton("Buscar");
+      BUsu.setBounds(25, 100, 100, 30);
+      BUsu.setEnabled(true);
+      BUsu.addActionListener(this);
+      add(BUsu);
       
-      BBg = new JButton("Buscar");
-      BBg.setBounds(245, 100, 100, 30);
-      BBg.setEnabled(true);
-      BBg.addActionListener(this);
-      add(BBg);
-
+      BPub = new JButton("Buscar");
+      BPub.setBounds(245, 100, 100, 30);
+      BPub.setEnabled(true);
+      BPub.addActionListener(this);
+      add(BPub);
+      
+      BPag = new JButton("Buscar");
+      BPag.setBounds(480, 100, 100, 30);
+      BPag.setEnabled(true);
+      BPag.addActionListener(this);
+      add(BPag);
       
         //----------->>>>>>>>>Area de Texto<<<<<<<<<<<------------
       AreaImpr=new JTextArea();
@@ -94,9 +123,19 @@ public class Cons_General extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         
-        if (ae.getSource()==BBg){
-           JOptionPane.showMessageDialog(this,"Encontrando Resultados... "+txtBg.getText());
-           txtBg.setText(" "); AreaImpr.setText("\t\tEncontrando Resultado Busqueda..... ");
+        if (ae.getSource()==BUsu){
+            JOptionPane.showMessageDialog(this,"Buscando Usuario "+txtUsu.getText());
+            txtUsu.setText(" "); AreaImpr.setText("\t\tResultado Busqueda Por Usuario.... ");
+
+        }
+        if (ae.getSource()==BPub){
+           JOptionPane.showMessageDialog(this,"Buscando Publicación "+txtPub.getText());
+           txtPub.setText(" "); AreaImpr.setText("\t\tResultado Busqueda Por Publicación..... ");
+           
+        }
+        if (ae.getSource()==BPag){
+           JOptionPane.showMessageDialog(this,"Buscando Pagina "+txtPag.getText());
+           txtPag.setText(" "); AreaImpr.setText("\t\tResultado Busqueda Por Pagina.... ");
            
         }
     }

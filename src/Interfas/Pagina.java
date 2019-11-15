@@ -14,7 +14,6 @@ public class Pagina extends JPanel implements ActionListener {
     //--------Atributos Globales----------
    private JButton BB,BAnadir,BGuardar,BModificar,BLimpiar,BEliminar;
    private JTextField txtBr,txtUsu,txtInst,txtFace,txtTwi;
-   private JTextArea ACont;
     //------------------------------------
    
      public Pagina(){
@@ -33,7 +32,7 @@ public class Pagina extends JPanel implements ActionListener {
       title.setFont(new Font("Dyuthi",Font.ITALIC, 20));
       add(title);
       
-      JLabel BP=new JLabel("C.I o Nombre", SwingConstants.CENTER);
+      JLabel BP=new JLabel("Ingrese Cedula", SwingConstants.CENTER);
       BP.setForeground(Color.BLACK);
       BP.setBounds(440, 30, 150, 40);
       BP.setFont(new Font("Dyuthi",Font.ITALIC, 16));
@@ -89,26 +88,20 @@ public class Pagina extends JPanel implements ActionListener {
       BB.addActionListener(this);
       add(BB);
       
-      BAnadir = new JButton("Nueva");
-      BAnadir.setBounds(10, 410, 100, 30);
-      BAnadir.setEnabled(true);
-      BAnadir.addActionListener(this);
-      add(BAnadir);
-      
       BGuardar = new JButton("Guardar");
-      BGuardar.setBounds(130, 410, 100, 30);
+      BGuardar.setBounds(30, 410, 100, 30);
       BGuardar.setEnabled(true);
       BGuardar.addActionListener(this);
       add(BGuardar);
       
       BModificar = new JButton("Modificar");
-      BModificar.setBounds(250, 410, 100, 30);
+      BModificar.setBounds(170, 410, 100, 30);
       BModificar.setEnabled(true);
       BModificar.addActionListener(this);
       add(BModificar);
       
       BLimpiar = new JButton("Limpiar");
-      BLimpiar.setBounds(370, 410, 100, 30);
+      BLimpiar.setBounds(320, 410, 100, 30);
       BLimpiar.setEnabled(true);
       BLimpiar.addActionListener(this);
       add(BLimpiar);
@@ -127,12 +120,6 @@ public class Pagina extends JPanel implements ActionListener {
         if (ae.getSource()==BB){
            JOptionPane.showMessageDialog(this,"Encontrando Resultados... "+txtBr.getText());
 
-       }
-       
-       if (ae.getSource()==BAnadir){
-            JOptionPane.showMessageDialog(this,"Agrega tus Datos... ");
-
-            
        }
        
        if (ae.getSource()==BGuardar){
