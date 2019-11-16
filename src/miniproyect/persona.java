@@ -5,7 +5,7 @@
  */
 package miniproyect;
 
-import java.sql.Connection;
+import com.mysql.jdbc.Connection;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class persona extends javax.swing.JFrame {
 
-    public static final String URL = "jdbc:mysql://localhost:3306/miniproyecto";
+    public static final String URL = "jdbc:mysql://localhost:3306/prueba";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
    PreparedStatement ps;
@@ -35,7 +35,7 @@ public class persona extends javax.swing.JFrame {
             con=(Connection) DriverManager.getConnection(URL,USERNAME,PASSWORD);
            JOptionPane.showMessageDialog(null,"Conectado a la base de datos :D");
         } catch (Exception e) {
-          JOptionPane.showMessageDialog(null,"Esta dando error mano" + e);
+            System.err.println("Error:" + e);
         }
       
      return con;
@@ -47,9 +47,7 @@ public class persona extends javax.swing.JFrame {
     txtClave.setText(null);
     cbxNivel.setSelectedIndex(0); 
     txtEmail.setText(null);
-    txtFacebook.setText(null);
-    txtInstagram.setText(null);
-    txtTwitter.setText(null);
+   
    
     
     }  
@@ -84,14 +82,8 @@ public class persona extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         busquedaCedula = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtFacebook = new javax.swing.JTextField();
-        txtInstagram = new javax.swing.JTextField();
-        txtTwitter = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Nombre_usuario:");
 
@@ -165,12 +157,6 @@ public class persona extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Enlace_facebook");
-
-        jLabel9.setText("Enlace_twitter");
-
-        jLabel10.setText("Enlace_Instagram");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,28 +172,33 @@ public class persona extends javax.swing.JFrame {
                         .addComponent(btnLimpiar)
                         .addGap(35, 35, 35))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(111, 111, 111)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                            .addComponent(txtClave, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                            .addComponent(cbxNivel, 0, 149, Short.MAX_VALUE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                            .addComponent(txtCedula)
-                            .addComponent(txtFacebook)
-                            .addComponent(txtInstagram)
-                            .addComponent(txtTwitter))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(165, 165, 165)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                                    .addComponent(cbxNivel, 0, 149, Short.MAX_VALUE)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(93, 93, 93)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,15 +217,19 @@ public class persona extends javax.swing.JFrame {
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(busquedaCedula)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(busquedaCedula))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,19 +238,7 @@ public class persona extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtTwitter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnModificar)
@@ -285,16 +268,15 @@ public class persona extends javax.swing.JFrame {
     try{
     con = getConnection();
     
-    ps = con.prepareStatement("INSERT INTO usuario (Nombre_Usuario,Cedula,Clave_Usuario,nivel_usuario,email,enlace_facebook,enlace_instagram,enlace_twitter) VALUES(?,?,?,?,?,?,?,?) ");
-    ps.setString(1,txtNombre.getText());
-    ps.setString(2,txtCedula.getText());
-    ps.setString(3,txtClave.getText());
-    ps.setString(4,cbxNivel.getSelectedItem().toString());
-    ps.setString(5,txtEmail.getText());
-    ps.setString(6,txtFacebook.getText());
-    ps.setString(7,txtInstagram.getText());
-    ps.setString(8,txtTwitter.getText());
+    ps = con.prepareStatement("INSERT INTO usuario (usuario,clave,cedula,correo,nivel) VALUES(?,?,?,?,?) ");
+      ps.setString(1,txtNombre.getText());
+    ps.setString(2,txtClave.getText());
+    ps.setString(3,txtCedula.getText());
  
+     ps.setString(4,txtEmail.getText());
+    ps.setString(5,cbxNivel.getSelectedItem().toString());
+   
+
    
    int res =  ps.executeUpdate();
    
@@ -307,7 +289,15 @@ public class persona extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(null,"Error al Registrar");
      LimpiarCajas();
    }
-   con.close();
+   
+    
+  
+ 
+  con.close();
+   
+   
+   
+
     }catch(SQLException e){
       
         
@@ -316,7 +306,8 @@ public class persona extends javax.swing.JFrame {
                        JOptionPane.ERROR_MESSAGE);
             
       } else{
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                  System.out.println("error " + e);
+                        
             
         
         }  
@@ -325,7 +316,7 @@ public class persona extends javax.swing.JFrame {
     }
     
     
-    
+     
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -333,23 +324,21 @@ public class persona extends javax.swing.JFrame {
        
        try{
       con = getConnection();
-      ps = con.prepareStatement("SELECT * FROM usuario WHERE nombre_usuario = ?");
+      ps = con.prepareStatement("SELECT * FROM usuario WHERE usuario = ?");
       ps.setString(1,txtNombre.getText());
       rs = ps.executeQuery();
       
       
       if(rs.next()){
-      txtID.setText(rs.getString("id_usuario"));
-      txtNombre.setText(rs.getString("nombre_usuario"));
-      txtCedula.setText(rs.getString("Cedula"));
-      txtClave.setText(rs.getString("clave_usuario"));
-      cbxNivel.setSelectedItem(rs.getString("nivel_usuario"));
-      txtEmail.setText(rs.getString("email"));
-      txtFacebook.setText(rs.getString("enlace_facebook"));
-      txtInstagram.setText(rs.getString("enlace_instagram"));
-      txtTwitter.setText(rs.getString("enlace_twitter"));
+     txtID.setText(rs.getString("id_usuario"));
+     txtNombre.setText(rs.getString("usuario"));
+     txtClave.setText(rs.getString("clave"));
+     txtCedula.setText(rs.getString("cedula"));
+     txtEmail.setText(rs.getString("correo"));
+     cbxNivel.setSelectedItem(rs.getString("nivel"));
+  
       }else{
-      JOptionPane.showMessageDialog(null,"Error,no existe una persona con ese nombre");
+      JOptionPane.showMessageDialog(null,"Error,no existe una persona con ese usuario");
           
       }
        }catch(Exception e){}
@@ -362,16 +351,16 @@ public class persona extends javax.swing.JFrame {
     try{
     con = getConnection();
     
-    ps = con.prepareStatement("UPDATE usuario SET nombre_usuario=?, Cedula=?, clave_usuario=?, nivel_usuario=?, email=?, enlace_facebook=?, enlace_instagram=?, enlace_twitter=? WHERE id_usuario=?");
+    ps = con.prepareStatement("UPDATE usuario SET usuario=?, clave=?, cedula=? correo=?, nivel=? WHERE id_usuario=?");
     ps.setString(1,txtNombre.getText());
-ps.setString(2,txtCedula.getText());
-    ps.setString(3,txtClave.getText());
-    ps.setString(4,cbxNivel.getSelectedItem().toString());
-    ps.setString(5,txtEmail.getText());
-    ps.setString(6,txtFacebook.getText());
-    ps.setString(7,txtInstagram.getText());
-    ps.setString(8,txtTwitter.getText());
-    ps.setString(9,txtID.getText());
+   ps.setString(2,txtClave.getText());
+      ps.setString(3,txtCedula.getText());
+ps.setString(4,txtEmail.getText());
+    ps.setString(5,cbxNivel.getSelectedItem().toString());
+    ps.setString(6,txtID.getText());
+
+ 
+  
  
    
    int res =  ps.executeUpdate();
@@ -419,7 +408,7 @@ ps.setString(2,txtCedula.getText());
      LimpiarCajas();
    }
    con.close();
-    }catch(Exception e){
+    }catch(SQLException e){
         System.out.println(e);
     }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -433,21 +422,20 @@ ps.setString(2,txtCedula.getText());
             Connection con = null;
         try{
   con = getConnection();
-      ps = con.prepareStatement("SELECT * FROM usuario WHERE Cedula = ?");
+      ps = con.prepareStatement("SELECT * FROM usuario WHERE cedula = ?");
       ps.setString(1,txtCedula.getText());
       rs = ps.executeQuery();
       
       
       if(rs.next()){
-      txtID.setText(rs.getString("id_usuario"));
-     txtNombre.setText(rs.getString("nombre_usuario"));
-     txtCedula.setText(rs.getString("Cedula"));
-      txtClave.setText(rs.getString("clave_usuario"));
-      cbxNivel.setSelectedItem(rs.getString("nivel_usuario"));
-      txtEmail.setText(rs.getString("email"));
-       txtFacebook.setText(rs.getString("enlace_facebook"));
-      txtInstagram.setText(rs.getString("enlace_instagram"));
-      txtTwitter.setText(rs.getString("enlace_twitter"));
+ 
+     txtNombre.setText(rs.getString("nombre"));
+ txtClave.setText(rs.getString("clave"));
+    txtCedula.setText(rs.getString("cedula"));
+    
+      txtEmail.setText(rs.getString("correo"));
+        cbxNivel.setSelectedItem(rs.getString("nivel"));
+    
       }else{
       JOptionPane.showMessageDialog(null,"Error,no existe una persona con esa cedula");
           
@@ -495,20 +483,14 @@ ps.setString(2,txtCedula.getText());
     private javax.swing.JButton busquedaCedula;
     private javax.swing.JComboBox<String> cbxNivel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFacebook;
     private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtInstagram;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTwitter;
     // End of variables declaration//GEN-END:variables
 }

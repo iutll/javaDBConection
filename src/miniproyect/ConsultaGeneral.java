@@ -5,7 +5,7 @@
  */
 package miniproyect;
 
-import java.sql.Connection;
+import com.mysql.jdbc.Connection;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class ConsultaGeneral extends javax.swing.JFrame {
 
-    public static final String URL = "jdbc:mysql://localhost:3306/miniproyecto";
+    public static final String URL = "jdbc:mysql://localhost:3306/prueba";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
    PreparedStatement ps;
@@ -66,7 +66,7 @@ public class ConsultaGeneral extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         AreaConsulta = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Tabla_usuario:");
 
@@ -172,7 +172,7 @@ public class ConsultaGeneral extends javax.swing.JFrame {
            System.out.println("");
            System.out.println("id" +" " + "usuario" +" "+ "clave" +" "+ "rango" +" "+ "email");
       while(rs.next()){
-     System.out.println(rs.getInt("id_usuario") +" "  + rs.getString("Cedula") +" " + rs.getString("nombre_usuario") +" "+ rs.getString("clave_usuario") +" "+ rs.getInt("nivel_usuario") + " " + rs.getString("Email") + " " +rs.getString("enlace_facebook") + " " + rs.getString("enlace_instagram") + " " + rs.getString("enlace_twitter"));
+     System.out.println(rs.getInt("id_usuario") +" "  + rs.getString("usuario") +" " + rs.getString("clave") +" "+ rs.getString("cedula") +" "+ rs.getString("correo") + " " + rs.getString("nivel") );
  
       }
        }catch(Exception e){
@@ -195,7 +195,7 @@ public class ConsultaGeneral extends javax.swing.JFrame {
            System.out.println("");
            System.out.println("id_publicacion" +" "  + "Titulo" +" " + "Texto" +" " + "Fecha " +" "  );
       while(rs.next()){
-        System.out.println(rs.getInt("id_publicacion") +" " + rs.getString("nombre_usuario") + rs.getString("publicacion_titulo") + rs.getString("publicacion_texto") +" " +rs.getDate("publicacion_fecha")  +" " + rs.getString("Cedula") );
+        System.out.println(rs.getInt("id_publicacion") +" " + rs.getString("titulo") + rs.getString("cedulauser") + rs.getString("contenido") +" " +rs.getDate("fecha") );
       }
        }catch(Exception e){
        
@@ -208,7 +208,7 @@ public class ConsultaGeneral extends javax.swing.JFrame {
        try{
       con = getConnection();
      
-      ps = con.prepareStatement("SELECT * FROM pagina");
+      ps = con.prepareStatement("SELECT * FROM redessociales");
   
       rs = ps.executeQuery();
       
@@ -216,7 +216,7 @@ public class ConsultaGeneral extends javax.swing.JFrame {
            System.out.println("");
            System.out.println("id_pagina" +" " + "footer" +" "+ "enlace facebook" +" "+ "enlace instagram" +" "+ "enlace_twitter" + " " + "parrafo_pagina" + " " + "archivo_encabezado" + " " + "Titulo_encabezado");
       while(rs.next()){
- System.out.println(rs.getInt("id_pagina") +" " +  rs.getString("footer_pagina") +" " + rs.getString("enlace_facebook") + rs.getString("enlace_instagram") + rs.getString("enlace_twitter") + rs.getString("parrafo_pagina") + rs.getString("archivo_encabezado") + rs.getString("titulo_encabezado") + rs.getString("Cedula") );
+ System.out.println(rs.getInt("id_redes") +" " + rs.getString("twitter") + rs.getString("instagram") + rs.getString("facebook") + rs.getString("cedula") );
  
       }
        }catch(Exception e){

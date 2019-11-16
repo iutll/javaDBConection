@@ -5,7 +5,7 @@
  */
 package miniproyect;
 
-import java.sql.Connection;
+import com.mysql.jdbc.Connection;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class publicacion extends javax.swing.JFrame {
 
-    public static final String URL = "jdbc:mysql://localhost:3306/miniproyecto";
+    public static final String URL = "jdbc:mysql://localhost:3306/prueba";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
    PreparedStatement ps;
@@ -42,11 +42,11 @@ public class publicacion extends javax.swing.JFrame {
     }
       
     private void LimpiarCajas(){
-    txtUsuario.setText(null);
+    txtcedula.setText(null);
     txtTitulo.setText(null);
     txtpublicacion.setText(null);
     txtFecha.setText(null);
-    txtUsuario.setText(null);
+    txtcedula.setText(null);
   
    
    
@@ -79,9 +79,9 @@ public class publicacion extends javax.swing.JFrame {
         txtID = new javax.swing.JTextField();
         txtFecha = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
+        txtcedula = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Titulo_Publicacion:");
 
@@ -137,7 +137,7 @@ public class publicacion extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Usuario");
+        jLabel4.setText("cedula");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,18 +147,19 @@ public class publicacion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel4)))
                         .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtpublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnGuardar)
@@ -178,23 +179,17 @@ public class publicacion extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBuscar)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscar)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtpublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -228,11 +223,10 @@ public class publicacion extends javax.swing.JFrame {
     try{
     con = getConnection();
     
-    ps = con.prepareStatement("INSERT INTO publicacion (nombre_usuario,publicacion_titulo,publicacion_texto,publicacion_fecha) VALUES(?,?,?,?) ");
-        ps.setString(1,txtUsuario.getText());
-    ps.setString(2,txtTitulo.getText());
-
-    ps.setString(3,txtpublicacion.getText());
+    ps = con.prepareStatement("INSERT INTO publicacion (titulo,cedulauser,contenido,fecha) VALUES(?,?,?,?) ");
+            ps.setString(1,txtTitulo.getText());
+            ps.setString(2,txtcedula.getText());
+   ps.setString(3,txtpublicacion.getText());
     ps.setDate(4,Date.valueOf(txtFecha.getText()));
 
   
@@ -259,18 +253,18 @@ public class publicacion extends javax.swing.JFrame {
        
        try{
       con = getConnection();
-      ps = con.prepareStatement("SELECT * FROM publicacion WHERE publicacion_titulo = ?");
+      ps = con.prepareStatement("SELECT * FROM publicacion WHERE titulo = ?");
       ps.setString(1,txtTitulo.getText());
       rs = ps.executeQuery();
       
       
       if(rs.next()){
-          txtID.setText(rs.getString("id_publicacion"));
-          txtUsuario.setText(rs.getString("nombre_usuario"));
-        
-      txtTitulo.setText(rs.getString("publicacion_titulo"));
-      txtpublicacion.setText(rs.getString("publicacion_texto"));
-    txtFecha.setText(rs.getString("publicacion_fecha"));
+          JOptionPane.showMessageDialog(null,"Busqueda exitosa");
+        txtTitulo.setText(rs.getString("titulo"));
+          txtcedula.setText(rs.getString("cedulauser"));
+       txtpublicacion.setText(rs.getString("contenido"));
+    txtFecha.setText(rs.getString("fecha"));
+    
   
   
       }else{
@@ -289,20 +283,21 @@ public class publicacion extends javax.swing.JFrame {
     try{
     con = getConnection();
     
-    ps = con.prepareStatement("UPDATE publicacion SET nombre_usuario=?, publicacion_titulo=?, publicacion_texto=?, publicacion_fecha=? WHERE id_publicacion=?");
-   ps.setString(1,txtUsuario.getText());
-    ps.setString(2,txtTitulo.getText());
-    ps.setString(3,txtpublicacion.getText());
-    ps.setDate(4, Date.valueOf(txtFecha.getText()));
+    ps = con.prepareStatement("UPDATE publicacion SET titulo=?, cedulauser=?, contenido=?, fecha=? WHERE id_publicacion=?");
 
-  ps.setString(5,txtID.getText());
+    ps.setString(1,txtTitulo.getText());
+    ps.setString(2,txtcedula.getText());
+    ps.setString(3,txtpublicacion.getText());
+    ps.setDate(4,Date.valueOf(txtFecha.getText()));
+    ps.setString(5,txtID.getText());
+
  
    
    int res =  ps.executeUpdate();
-   
+   System.out.println(res);
    if(res > 0){
    
-     JOptionPane.showMessageDialog(null,"Usuario modificado");
+     JOptionPane.showMessageDialog(null,"publicacion modificada");
      LimpiarCajas();
    }else{
    
@@ -321,9 +316,9 @@ public class publicacion extends javax.swing.JFrame {
     try{
     con = getConnection();
     
-    ps = con.prepareStatement("DELETE FROM publicacion WHERE id_publicacion=?");
+    ps = con.prepareStatement("DELETE FROM publicacion WHERE titulo=?");
    
-    ps.setInt(1,Integer.parseInt(txtID.getText()));
+    ps.setString(1,(txtTitulo.getText()));
  
    
    int res =  ps.executeUpdate();
@@ -391,7 +386,7 @@ public class publicacion extends javax.swing.JFrame {
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtTitulo;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtcedula;
     private javax.swing.JTextField txtpublicacion;
     // End of variables declaration//GEN-END:variables
 }

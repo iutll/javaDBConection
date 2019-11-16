@@ -5,7 +5,7 @@
  */
 package miniproyect;
 
-import java.sql.Connection;
+import com.mysql.jdbc.Connection;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class pagina extends javax.swing.JFrame {
 
-    public static final String URL = "jdbc:mysql://localhost:3306/miniproyecto";
+    public static final String URL = "jdbc:mysql://localhost:3306/prueba";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
    PreparedStatement ps;
@@ -42,13 +42,12 @@ public class pagina extends javax.swing.JFrame {
     }
       
     private void LimpiarCajas(){
-    txtFooter.setText(null);
+  
     txtFacebook.setText(null);
     txtInstagram.setText(null);
     txtTwitter.setText(null);
-     txtParrafo.setText(null);
-     txtArchivo.setText(null);
-     txtTitulo.setText(null);
+     txtcedula.setText(null);
+   
      
    
    
@@ -68,8 +67,6 @@ public class pagina extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtFooter = new javax.swing.JTextField();
         txtFacebook = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
@@ -82,22 +79,10 @@ public class pagina extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         txtTwitter = new javax.swing.JTextField();
-        txtParrafo = new javax.swing.JTextField();
-        txtArchivo = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtTitulo = new javax.swing.JTextField();
+        txtcedula = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jLabel1.setText("footer_pagina");
-
-        txtFooter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFooterActionPerformed(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -152,17 +137,13 @@ public class pagina extends javax.swing.JFrame {
 
         jLabel6.setText("Enlace_Instagram");
 
-        jLabel7.setText("parrafo_pagina");
-
-        jLabel8.setText("Archivo encabezado");
+        jLabel7.setText("cedula");
 
         txtTwitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTwitterActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Titulo Encabezado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,25 +160,19 @@ public class pagina extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnGuardar)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(btnGuardar)))
                         .addGap(143, 143, 143)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtFooter, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtInstagram, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                             .addComponent(txtFacebook, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                             .addComponent(txtTwitter)
-                            .addComponent(txtParrafo)
-                            .addComponent(txtArchivo)
-                            .addComponent(txtTitulo))
+                            .addComponent(txtcedula))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -212,37 +187,23 @@ public class pagina extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFooter, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtFacebook)
-                        .addGap(2, 2, 2)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtFacebook, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtInstagram)
-                        .addGap(4, 4, 4)))
+                    .addComponent(txtInstagram, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTwitter, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtParrafo, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar)
                     .addComponent(btnLimpiar)
@@ -254,10 +215,6 @@ public class pagina extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFooterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFooterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFooterActionPerformed
-
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
@@ -268,14 +225,11 @@ public class pagina extends javax.swing.JFrame {
     try{
     con = getConnection();
     
-    ps = con.prepareStatement("INSERT INTO pagina (footer_pagina,parrafo_pagina,archivo_encabezado,titulo_encabezado) VALUES(?,?,?,?) ");
-    ps.setString(1,txtFooter.getText());
-   
-  
-   
-    ps.setString(2,txtParrafo.getText());
-    ps.setString(3,txtArchivo.getText());
-    ps.setString(4,txtTitulo.getText());
+    ps = con.prepareStatement("INSERT INTO redessociales (twitter,instagram,facebook,cedula) VALUES(?,?,?,?) ");
+    ps.setString(1,txtTwitter.getText());
+   ps.setString(2,txtInstagram.getText());
+    ps.setString(3,txtFacebook.getText());
+    ps.setString(4,txtcedula.getText());
    int res =  ps.executeUpdate();
    
    if(res > 0){
@@ -298,20 +252,18 @@ public class pagina extends javax.swing.JFrame {
        
        try{
       con = getConnection();
-      ps = con.prepareStatement("SELECT * FROM pagina WHERE id_pagina = ?");
+      ps = con.prepareStatement("SELECT * FROM redessociales WHERE id_redes = ?");
       ps.setString(1,txtID.getText());
       rs = ps.executeQuery();
       
       
       if(rs.next()){
-      txtID.setText(rs.getString("id_pagina"));
-      txtFooter.setText(rs.getString("footer_pagina"));
-      txtFacebook.setText(rs.getString("enlace_facebook"));
-    txtInstagram.setText(rs.getString("enlace_instagram"));
-    txtTwitter.setText(rs.getString("enlace_twitter"));
-    txtParrafo.setText(rs.getString("parrafo_pagina"));
-    txtArchivo.setText(rs.getString("archivo_encabezado"));
-    txtTitulo.setText(rs.getString("titulo_encabezado"));
+      txtID.setText(rs.getString("id_redes"));
+        txtTwitter.setText(rs.getString("twitter"));
+           txtInstagram.setText(rs.getString("instagram"));
+      txtFacebook.setText(rs.getString("facebook"));
+ txtcedula.setText(rs.getString("cedula"));
+  
   
       }else{
       JOptionPane.showMessageDialog(null,"Error,no existe una publicacion con esa id");
@@ -329,13 +281,11 @@ public class pagina extends javax.swing.JFrame {
     try{
     con = getConnection();
     
-    ps = con.prepareStatement("UPDATE pagina SET footer_pagina=?,  parrafo_pagina=?, archivo_encabezado=?, titulo_encabezado=? WHERE id_pagina=?");
-  ps.setString(1,txtFooter.getText());
-  
- 
-    ps.setString(2,txtParrafo.getText());
-    ps.setString(3,txtArchivo.getText());
-    ps.setString(4,txtTitulo.getText());
+    ps = con.prepareStatement("UPDATE redessociales SET twitter=?,  instagram=?, facebook=?, cedula=? WHERE id_redes=?");
+  ps.setString(1,txtTwitter.getText());
+ ps.setString(2,txtInstagram.getText());
+    ps.setString(3,txtFacebook.getText());
+    ps.setString(4,txtcedula.getText());
     ps.setString(5,txtID.getText());
  
    
@@ -433,20 +383,14 @@ public class pagina extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtArchivo;
     private javax.swing.JTextField txtFacebook;
-    private javax.swing.JTextField txtFooter;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtInstagram;
-    private javax.swing.JTextField txtParrafo;
-    private javax.swing.JTextField txtTitulo;
     private javax.swing.JTextField txtTwitter;
+    private javax.swing.JTextField txtcedula;
     // End of variables declaration//GEN-END:variables
 }
