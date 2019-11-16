@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2019 a las 02:08:13
+-- Tiempo de generación: 16-11-2019 a las 05:40:32
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `publicacion` (
   `id_publicacion` int(2) NOT NULL,
-  `titulo` varchar(50) NOT NULL,
+  `titulo` varchar(50) DEFAULT NULL,
   `cedulauser` varchar(12) DEFAULT NULL,
-  `contenido` varchar(200) NOT NULL,
-  `fecha` date NOT NULL
+  `contenido` varchar(200) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `publicacion` (
 --
 
 INSERT INTO `publicacion` (`id_publicacion`, `titulo`, `cedulauser`, `contenido`, `fecha`) VALUES
-(1, '123', '22888123', '123', '2019-04-12');
+(3, 'prueba', '22333111', 'dasdasdasdasd', '2014-02-12');
 
 -- --------------------------------------------------------
 
@@ -50,6 +50,7 @@ INSERT INTO `publicacion` (`id_publicacion`, `titulo`, `cedulauser`, `contenido`
 --
 
 CREATE TABLE `usuario` (
+  `id_usuario` int(2) NOT NULL,
   `usuario` varchar(30) NOT NULL,
   `clave` varchar(8) NOT NULL,
   `cedula` varchar(12) NOT NULL,
@@ -61,8 +62,9 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`usuario`, `clave`, `cedula`, `correo`, `nivel`) VALUES
-('ignacio', '1234', '22888123', 'ignacio@gmail.com', 1);
+INSERT INTO `usuario` (`id_usuario`, `usuario`, `clave`, `cedula`, `correo`, `nivel`) VALUES
+(3, 'admin', '223311', '223311', 'asd@gmail.com', 1),
+(4, 'user', '123', '22333111', 'edsel@gmail.com', 1);
 
 --
 -- Índices para tablas volcadas
@@ -79,7 +81,8 @@ ALTER TABLE `publicacion`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`cedula`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `cedula` (`cedula`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -89,7 +92,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id_publicacion` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_publicacion` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
