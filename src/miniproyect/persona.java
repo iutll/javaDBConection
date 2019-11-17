@@ -428,7 +428,7 @@ ps.setString(4,txtEmail.getText());
       
       
       if(rs.next()){
- 
+ txtID.setText(rs.getString("id_usuario"));
      txtNombre.setText(rs.getString("nombre"));
  txtClave.setText(rs.getString("clave"));
     txtCedula.setText(rs.getString("cedula"));

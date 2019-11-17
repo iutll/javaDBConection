@@ -63,8 +63,9 @@ public class ConsultaGeneral extends javax.swing.JFrame {
         txtID = new javax.swing.JTextField();
         btnBuscarPublicacion = new javax.swing.JButton();
         btnbuscarPagina = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        AreaConsulta = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        txtCedula = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,53 +103,76 @@ public class ConsultaGeneral extends javax.swing.JFrame {
             }
         });
 
-        AreaConsulta.setColumns(20);
-        AreaConsulta.setRows(5);
-        jScrollPane1.setViewportView(AreaConsulta);
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel4.setText("Busqueda Filtrada Por Cedula");
+
+        jLabel5.setText("Coloca la cedula aqui:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscar)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel5)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar))
-                        .addGap(91, 91, 91)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscarPublicacion)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnbuscarPagina)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(btnBuscarPublicacion))
+                                .addGap(211, 211, 211)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnbuscarPagina)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(220, 220, 220)
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
-                    .addComponent(btnbuscarPagina)
-                    .addComponent(btnBuscarPublicacion))
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBuscar)
+                            .addComponent(btnBuscarPublicacion)
+                            .addComponent(btnbuscarPagina)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(334, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,16 +188,18 @@ public class ConsultaGeneral extends javax.swing.JFrame {
        try{
       con = getConnection();
       JOptionPane.showMessageDialog(null,"Ve la consola");
-      ps = con.prepareStatement("SELECT * FROM usuario");
-  
+      ps = con.prepareStatement("SELECT * FROM usuario WHERE cedula = ?" );
+        ps.setString(1,txtCedula.getText());
       rs = ps.executeQuery();
       
            System.out.println("Base de datos de usuario");
            System.out.println("");
            System.out.println("id" +" " + "usuario" +" "+ "clave" +" "+ "rango" +" "+ "email");
-      while(rs.next()){
+      if(rs.next()){
      System.out.println(rs.getInt("id_usuario") +" "  + rs.getString("usuario") +" " + rs.getString("clave") +" "+ rs.getString("cedula") +" "+ rs.getString("correo") + " " + rs.getString("nivel") );
  
+      }else{
+        JOptionPane.showMessageDialog(null,"No existe usuario asociado a esa cedula");
       }
        }catch(Exception e){
        
@@ -187,15 +213,18 @@ public class ConsultaGeneral extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(null,"Ve la consola");
        try{
       con = getConnection();
-      ps = con.prepareStatement("SELECT * FROM publicacion");
-  
+      ps = con.prepareStatement("SELECT * FROM publicacion WHERE cedulauser=?");
+            ps.setString(1,txtCedula.getText());
       rs = ps.executeQuery();
       
            System.out.println("Base de datos de Publicacion");
            System.out.println("");
            System.out.println("id_publicacion" +" "  + "Titulo" +" " + "Texto" +" " + "Fecha " +" "  );
-      while(rs.next()){
+      if(rs.next()){
         System.out.println(rs.getInt("id_publicacion") +" " + rs.getString("titulo") + rs.getString("cedulauser") + rs.getString("contenido") +" " +rs.getDate("fecha") );
+      }else{
+      
+      JOptionPane.showMessageDialog(null,"No existe publicacion asociado a esa cedula");
       }
        }catch(Exception e){
        
@@ -208,19 +237,22 @@ public class ConsultaGeneral extends javax.swing.JFrame {
        try{
       con = getConnection();
      
-      ps = con.prepareStatement("SELECT * FROM redessociales");
-  
+      ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ?");
+        ps.setString(1,txtCedula.getText());
       rs = ps.executeQuery();
       
            System.out.println("Base de datos de pagina");
            System.out.println("");
            System.out.println("id_pagina" +" " + "footer" +" "+ "enlace facebook" +" "+ "enlace instagram" +" "+ "enlace_twitter" + " " + "parrafo_pagina" + " " + "archivo_encabezado" + " " + "Titulo_encabezado");
-      while(rs.next()){
+      if(rs.next()){
  System.out.println(rs.getInt("id_redes") +" " + rs.getString("twitter") + rs.getString("instagram") + rs.getString("facebook") + rs.getString("cedula") );
  
+      }else{
+      
+        JOptionPane.showMessageDialog(null,"No existen redes asociados a esa cedula");
       }
        }catch(Exception e){
-       
+       System.out.println("error " + e);
        }
        
     }//GEN-LAST:event_btnbuscarPaginaActionPerformed
@@ -257,14 +289,15 @@ public class ConsultaGeneral extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea AreaConsulta;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarPublicacion;
     private javax.swing.JButton btnbuscarPagina;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtID;
     // End of variables declaration//GEN-END:variables
 }

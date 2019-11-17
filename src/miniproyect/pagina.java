@@ -252,8 +252,8 @@ public class pagina extends javax.swing.JFrame {
        
        try{
       con = getConnection();
-      ps = con.prepareStatement("SELECT * FROM redessociales WHERE id_redes = ?");
-      ps.setString(1,txtID.getText());
+      ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ?");
+      ps.setString(1,txtcedula.getText());
       rs = ps.executeQuery();
       
       

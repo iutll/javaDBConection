@@ -253,13 +253,14 @@ public class publicacion extends javax.swing.JFrame {
        
        try{
       con = getConnection();
-      ps = con.prepareStatement("SELECT * FROM publicacion WHERE titulo = ?");
-      ps.setString(1,txtTitulo.getText());
+      ps = con.prepareStatement("SELECT * FROM publicacion WHERE cedulauser = ?");
+      ps.setString(1,txtcedula.getText());
       rs = ps.executeQuery();
       
       
       if(rs.next()){
           JOptionPane.showMessageDialog(null,"Busqueda exitosa");
+          txtID.setText(rs.getString("id_publicacion"));
         txtTitulo.setText(rs.getString("titulo"));
           txtcedula.setText(rs.getString("cedulauser"));
        txtpublicacion.setText(rs.getString("contenido"));
@@ -268,7 +269,7 @@ public class publicacion extends javax.swing.JFrame {
   
   
       }else{
-      JOptionPane.showMessageDialog(null,"Error,no existe una publicacion con ese titulo");
+      JOptionPane.showMessageDialog(null,"Error,no existe una publicacion con esa cedula");
           
       }
        }catch(Exception e){
@@ -290,10 +291,8 @@ public class publicacion extends javax.swing.JFrame {
     ps.setString(3,txtpublicacion.getText());
     ps.setDate(4,Date.valueOf(txtFecha.getText()));
     ps.setString(5,txtID.getText());
-
- 
-   
-   int res =  ps.executeUpdate();
+    
+    int res =  ps.executeUpdate();
    System.out.println(res);
    if(res > 0){
    
