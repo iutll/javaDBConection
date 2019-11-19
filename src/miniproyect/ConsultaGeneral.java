@@ -6,14 +6,13 @@
 package miniproyect;
 
 import com.mysql.jdbc.Connection;
-import java.net.URL;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -56,6 +55,8 @@ public class ConsultaGeneral extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -66,6 +67,21 @@ public class ConsultaGeneral extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +124,16 @@ public class ConsultaGeneral extends javax.swing.JFrame {
 
         jLabel5.setText("Coloca la cedula aqui:");
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,89 +141,110 @@ public class ConsultaGeneral extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscar)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel5)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(171, 171, 171)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(btnBuscarPublicacion))
-                                .addGap(211, 211, 211)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnbuscarPagina)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(220, 220, 220)
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
+                            .addComponent(btnBuscarPublicacion)
+                            .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(155, 155, 155)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(293, 293, 293)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(265, 265, 265)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnbuscarPagina)
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(221, 221, 221)
+                        .addComponent(jLabel4)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
+                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnBuscar)
-                            .addComponent(btnBuscarPublicacion)
-                            .addComponent(btnbuscarPagina)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(334, Short.MAX_VALUE))
+                            .addComponent(btnBuscarPublicacion))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnbuscarPagina)
+                        .addGap(29, 29, 29)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
        Connection con = null;
        
        try{
       con = getConnection();
-      JOptionPane.showMessageDialog(null,"Ve la consola");
       ps = con.prepareStatement("SELECT * FROM usuario WHERE cedula = ?" );
-        ps.setString(1,txtCedula.getText());
+      ps.setString(1,txtCedula.getText());
       rs = ps.executeQuery();
+      
+      // hacer modelo para visualizar la tabla
+      DefaultTableModel tableModel = new DefaultTableModel();
+      // valores del header
+      String[] valores = {"id", "usuario", "clave", "rango", "email"};
+      // ageregar dichos valores a el header la tabla
+      agregarHeaders(jTable2, tableModel, valores);
+      
       
            System.out.println("Base de datos de usuario");
            System.out.println("");
            System.out.println("id" +" " + "usuario" +" "+ "clave" +" "+ "rango" +" "+ "email");
-      if(rs.next()){
-     System.out.println(rs.getInt("id_usuario") +" "  + rs.getString("usuario") +" " + rs.getString("clave") +" "+ rs.getString("cedula") +" "+ rs.getString("correo") + " " + rs.getString("nivel") );
- 
+    // si existe un registro por lo menos 
+    if(rs.first()){
+          // repetir hasta que no haya mas usuarios
+          do{
+            
+              System.out.println(rs.getInt("id_usuario") +" "  + rs.getString("usuario") +" " + rs.getString("clave") +" "+ rs.getString("cedula") +" "+ rs.getString("correo") + " " + rs.getString("nivel") );
+              // valores de la fila
+              String[] row = {
+                  Integer.toString(rs.getInt("id_usuario")),
+                  rs.getString("usuario"),
+                  rs.getString("clave"),
+                  rs.getString("cedula"),
+                  rs.getString("correo"),
+                  rs.getString("nivel")
+              };
+              // agregar fila a la tabla
+              agregarFilas(tableModel, row);
+          
+          }while(rs.next());
+           
       }else{
         JOptionPane.showMessageDialog(null,"No existe usuario asociado a esa cedula");
       }
@@ -210,7 +257,6 @@ public class ConsultaGeneral extends javax.swing.JFrame {
     private void btnBuscarPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPublicacionActionPerformed
         // TODO add your handling code here:
         Connection con = null;
-       JOptionPane.showMessageDialog(null,"Ve la consola");
        try{
       con = getConnection();
       ps = con.prepareStatement("SELECT * FROM publicacion WHERE cedulauser=?");
@@ -219,9 +265,27 @@ public class ConsultaGeneral extends javax.swing.JFrame {
       
            System.out.println("Base de datos de Publicacion");
            System.out.println("");
-           System.out.println("id_publicacion" +" "  + "Titulo" +" " + "Texto" +" " + "Fecha " +" "  );
-      if(rs.next()){
-        System.out.println(rs.getInt("id_publicacion") +" " + rs.getString("titulo") + rs.getString("cedulauser") + rs.getString("contenido") +" " +rs.getDate("fecha") );
+           System.out.println("id_publicacion" +" "  + "Titulo" +" " + "cedula " + "Texto" +" " + "Fecha " +" "  );
+           // crear nuevo modelo de tabla
+           DefaultTableModel tableModel = new DefaultTableModel();
+           String[] columnNames = {"id_publicacion", "Titulo", "cedula ", "Texto", "Fecha"};
+           // agregar los headers
+           agregarHeaders(jTable2, tableModel, columnNames);
+           
+           // ver si existe un registro al menos
+           if(rs.first()){
+               do{
+                    System.out.println(rs.getInt("id_publicacion") +" " + rs.getString("titulo") + rs.getString("cedulauser") + rs.getString("contenido") +" " +rs.getDate("fecha") );
+                    String[] valoresRow = {
+                        Integer.toString(rs.getInt("id_publicacion")),
+                        rs.getString("titulo"),
+                        rs.getString("cedulauser"),
+                        rs.getString("contenido"),
+                        rs.getDate("fecha").toString()
+                    };
+                    // agregar una fila a la tabla
+                    agregarFilas(tableModel, valoresRow);
+               }while(rs.next());
       }else{
       
       JOptionPane.showMessageDialog(null,"No existe publicacion asociado a esa cedula");
@@ -233,20 +297,36 @@ public class ConsultaGeneral extends javax.swing.JFrame {
 
     private void btnbuscarPaginaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarPaginaActionPerformed
     Connection con = null;
-        JOptionPane.showMessageDialog(null,"Ve la consola");
        try{
       con = getConnection();
      
       ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ?");
         ps.setString(1,txtCedula.getText());
       rs = ps.executeQuery();
+      // modelo de tabla nuevo
+      DefaultTableModel tableModel = new DefaultTableModel();
+      // valores del header de la tabla
+      String[] valores = {"id_redes", "twitter", "instagram", "facebook", "cedula"};
+      // agregar header con valores a la tabla
+      agregarHeaders(jTable2, tableModel, valores);
+      
       
            System.out.println("Base de datos de pagina");
            System.out.println("");
            System.out.println("id_pagina" +" " + "footer" +" "+ "enlace facebook" +" "+ "enlace instagram" +" "+ "enlace_twitter" + " " + "parrafo_pagina" + " " + "archivo_encabezado" + " " + "Titulo_encabezado");
-      if(rs.next()){
- System.out.println(rs.getInt("id_redes") +" " + rs.getString("twitter") + rs.getString("instagram") + rs.getString("facebook") + rs.getString("cedula") );
- 
+      if(rs.first()){
+          do{
+               System.out.println(rs.getInt("id_redes") +" " + rs.getString("twitter") + rs.getString("instagram") + rs.getString("facebook") + rs.getString("cedula") );
+               String[] row = {
+                   Integer.toString(rs.getInt("id_redes")),
+                   rs.getString("twitter"),
+                   rs.getString("instagram"),
+                   rs.getString("facebook"),
+                   rs.getString("cedula")
+               };
+               // agregar nueva fila a la tabla
+               agregarFilas(tableModel, row);
+          }while(rs.next()); 
       }else{
       
         JOptionPane.showMessageDialog(null,"No existen redes asociados a esa cedula");
@@ -256,6 +336,10 @@ public class ConsultaGeneral extends javax.swing.JFrame {
        }
        
     }//GEN-LAST:event_btnbuscarPaginaActionPerformed
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,6 +371,35 @@ public class ConsultaGeneral extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    /*
+    ========================================================================================
+    ========================================================================================
+    ========================================================================================
+    ========================================================================================
+    
+    métodos para añadir dinamicamente los valores del header y las rows de una JTable
+    
+    ========================================================================================
+    ========================================================================================
+    ========================================================================================
+    ========================================================================================
+    
+    */
+    
+    void agregarHeaders(JTable table, DefaultTableModel tableModel, String[] valores){
+        // agregar columnas y su valor a el modelo
+           for(String columnName : valores){
+                tableModel.addColumn(columnName);
+            }
+           // setear modelo en la tabla
+           table.setModel(tableModel);
+    }
+    
+    void agregarFilas(DefaultTableModel tableModel, String[] valores){
+        tableModel.addRow(valores);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -297,6 +410,10 @@ public class ConsultaGeneral extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtID;
     // End of variables declaration//GEN-END:variables

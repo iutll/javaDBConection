@@ -234,7 +234,7 @@ public class pagina extends javax.swing.JFrame {
    
    if(res > 0){
    
-     JOptionPane.showMessageDialog(null,"publicacion Registrada");
+     JOptionPane.showMessageDialog(null,"redes Registradas");
      LimpiarCajas();
    }else{
    
@@ -254,6 +254,7 @@ public class pagina extends javax.swing.JFrame {
       con = getConnection();
       ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ?");
       ps.setString(1,txtcedula.getText());
+           System.out.println("el campo de cedula es " + txtcedula.getText());
       rs = ps.executeQuery();
       
       
@@ -266,7 +267,7 @@ public class pagina extends javax.swing.JFrame {
   
   
       }else{
-      JOptionPane.showMessageDialog(null,"Error,no existe una publicacion con esa id");
+      JOptionPane.showMessageDialog(null,"Error,no existe una publicacion con esa cedula");
           
       }
        }catch(Exception e){
