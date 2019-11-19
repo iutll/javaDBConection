@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * @author jose-dasilva
@@ -15,7 +16,7 @@ public class Persona extends JPanel implements ActionListener {
    private JButton BUsu,BGuardar,BModificar,BLimpiar,BEliminar;
    private JTextField txtUsu,txtMail,txtClv,txtCI;
    private JComboBox ListNivel;
-   private JTextArea AreaImpr;
+   //private JTable  AreaImpr;
     //------------------------------------
 
     public Persona(){
@@ -34,7 +35,7 @@ public class Persona extends JPanel implements ActionListener {
       title.setFont(new Font("Dyuthi",Font.ITALIC, 20));
       add(title);
     
-      JLabel Usu=new JLabel("-> Nombre Completo:");
+      JLabel Usu=new JLabel("-> Usuario:");
       Usu.setForeground(Color.BLACK);
       Usu.setBounds(20, 50, 150, 50);
       Usu.setFont(new Font("Dyuthi",Font.ITALIC, 17));
@@ -66,7 +67,7 @@ public class Persona extends JPanel implements ActionListener {
       
       //----------->>>>>>>>>Cajas de Texto<<<<<<<<<<<------------  
       txtUsu = new JTextField();
-      txtUsu.setBounds(175, 65, 165, 20);
+      txtUsu.setBounds(100, 65, 200, 20);
       add(txtUsu);
       
       txtMail = new JTextField();
@@ -119,27 +120,24 @@ public class Persona extends JPanel implements ActionListener {
       BEliminar.setEnabled(true);
       BEliminar.addActionListener(this);
       add(BEliminar);
-      
+      /*
       //----------->>>>>>>>>Area de Texto<<<<<<<<<<<------------
-      AreaImpr=new JTextArea();
+      AreaImpr=new JTable();
       AreaImpr.setBounds(120, 170, 500, 300);
-      AreaImpr.setBackground(Color.LIGHT_GRAY);
+      AreaImpr.setBackground(Color.BLUE);
       AreaImpr.setForeground(Color.BLACK);
-      AreaImpr.setEditable(false);
       add(AreaImpr);
-      
+      */
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
        
     if (ae.getSource()==BUsu){
             JOptionPane.showMessageDialog(this,"Buscando... ");
-            AreaImpr.setText("\t\tResultado De Busqueda.... ");
 
         }
     if (ae.getSource()==BGuardar){
             JOptionPane.showMessageDialog(this,"Guardando... ");
-            AreaImpr.setText(" ");
             txtUsu.setText(" ");
             txtClv.setText(" ");
             txtMail.setText(" ");
@@ -147,13 +145,11 @@ public class Persona extends JPanel implements ActionListener {
     }
     if (ae.getSource()==BModificar){
             JOptionPane.showMessageDialog(this,"Modificando... ");
-            AreaImpr.setText(" ");
             
     }
     if (ae.getSource()==BLimpiar){
             JOptionPane.showMessageDialog(this,"Limpiando... ");
             ListNivel.setSelectedItem("Seleccione");
-            AreaImpr.setText(" ");
             txtUsu.setText(" ");
             txtClv.setText(" ");
             txtMail.setText(" ");
@@ -161,7 +157,6 @@ public class Persona extends JPanel implements ActionListener {
     }
     if (ae.getSource()==BEliminar){
             JOptionPane.showMessageDialog(this,"Eliminando... ");
-            AreaImpr.setText(" ");
             
     }
 }}

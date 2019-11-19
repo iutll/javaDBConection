@@ -266,12 +266,10 @@ public class Login extends JFrame implements ActionListener{
     
         GrupoPaneles.setViewportView(Pag);
     }
-  /*
+  
             //-------------------->>>>>>>Metodo Main<<<<<<<<<--------------------------------
     public static void main(String[] args) {
         Login L =new Login(); //Intanciamos la Clase Login
     L.setVisible(true); //Hacemos Visible su Ventana
     }
-
-*/
   }
