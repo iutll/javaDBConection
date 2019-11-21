@@ -1,9 +1,9 @@
 
 package Interfas;
 
+import java.sql.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
@@ -14,7 +14,7 @@ public class Publicacion extends JPanel implements ActionListener {
     
     //--------Atributos Globales----------
    private JButton BB,BID,BAnadir,BGuardar,BModificar,BLimpiar,BEliminar;
-   private JTextField txtBp,txtID,txtUsu,txtTitle,txtFecha,txtPubli;
+   private JTextField txtBp,txtID,txtUsu,txtTitle,txtFecha;
    private JTextArea ACont; 
    private JComboBox Red=new JComboBox();
     //------------------------------------
