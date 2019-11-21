@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2019 a las 05:40:32
+-- Tiempo de generación: 21-11-2019 a las 21:09:30
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -33,15 +33,12 @@ CREATE TABLE `publicacion` (
   `titulo` varchar(50) DEFAULT NULL,
   `cedulauser` varchar(12) DEFAULT NULL,
   `contenido` varchar(200) DEFAULT NULL,
-  `fecha` date DEFAULT NULL
+  `fecha` date DEFAULT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `correo` varchar(60) NOT NULL,
+  `nivel` int(10) NOT NULL,
+  `red_publicada` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `publicacion`
---
-
-INSERT INTO `publicacion` (`id_publicacion`, `titulo`, `cedulauser`, `contenido`, `fecha`) VALUES
-(3, 'prueba', '22333111', 'dasdasdasdasd', '2014-02-12');
 
 -- --------------------------------------------------------
 
@@ -59,14 +56,6 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`id_usuario`, `usuario`, `clave`, `cedula`, `correo`, `nivel`) VALUES
-(3, 'admin', '223311', '223311', 'asd@gmail.com', 1),
-(4, 'user', '123', '22333111', 'edsel@gmail.com', 1);
-
---
 -- Índices para tablas volcadas
 --
 
@@ -75,14 +64,21 @@ INSERT INTO `usuario` (`id_usuario`, `usuario`, `clave`, `cedula`, `correo`, `ni
 --
 ALTER TABLE `publicacion`
   ADD PRIMARY KEY (`id_publicacion`),
-  ADD KEY `cedulacliente` (`cedulauser`);
+  ADD KEY `cedulacliente` (`cedulauser`),
+  ADD KEY `usuario` (`usuario`),
+  ADD KEY `correo` (`correo`),
+  ADD KEY `nivel` (`nivel`),
+  ADD KEY `red_publicada` (`red_publicada`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `cedula` (`cedula`);
+  ADD UNIQUE KEY `cedula` (`cedula`),
+  ADD KEY `correo` (`correo`),
+  ADD KEY `usuario` (`usuario`),
+  ADD KEY `nivel` (`nivel`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -92,13 +88,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id_publicacion` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_publicacion` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
@@ -108,7 +104,11 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  ADD CONSTRAINT `publicacion_ibfk_1` FOREIGN KEY (`cedulauser`) REFERENCES `usuario` (`cedula`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `publicacion_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `redessociales` (`usuario`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `publicacion_ibfk_2` FOREIGN KEY (`red_publicada`) REFERENCES `redessociales` (`Nombre_red`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `publicacion_ibfk_3` FOREIGN KEY (`cedulauser`) REFERENCES `redessociales` (`cedula`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `publicacion_ibfk_4` FOREIGN KEY (`correo`) REFERENCES `redessociales` (`correo`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `publicacion_ibfk_5` FOREIGN KEY (`nivel`) REFERENCES `redessociales` (`nivel_user`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
