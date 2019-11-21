@@ -351,7 +351,7 @@ public class persona extends javax.swing.JFrame {
     try{
     con = getConnection();
     
-    ps = con.prepareStatement("UPDATE usuario SET usuario=?, clave=?, cedula=? correo=?, nivel=? WHERE id_usuario=?");
+    ps = con.prepareStatement("UPDATE usuario SET usuario=?, clave=?, cedula=?, correo=?, nivel=? WHERE id_usuario=?");
     ps.setString(1,txtNombre.getText());
    ps.setString(2,txtClave.getText());
       ps.setString(3,txtCedula.getText());

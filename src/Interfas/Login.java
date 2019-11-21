@@ -109,7 +109,7 @@ public class Login extends JFrame implements ActionListener{
        JMenu menu1,menu2,menu3;
        
        mb= new JMenuBar(); //Instanciamos Barra Menu
-       mb.setLayout(null); //Desactivamos el diseño por Defecto de La Barra
+       //mb.setLayout(null); //Desactivamos el diseño por Defecto de La Barra
        mb.setBackground(Color.orange);
        setJMenuBar(mb); //Añadimos nuestra Barra al Panel
        
@@ -154,7 +154,7 @@ public class Login extends JFrame implements ActionListener{
             Man_Publi.addActionListener(this);
             menu3.add(Man_Publi);
             menu3.add(new JSeparator());
-            Man_Pag = new JMenuItem("Paginas");
+            Man_Pag = new JMenuItem("Redes");
             //exit.setBackground(Color.RED);
             Man_Pag.addActionListener(this);
             menu3.add(Man_Pag);
@@ -178,7 +178,6 @@ public class Login extends JFrame implements ActionListener{
       this.setSize(600, 500); //Estabrecemos su Tamaño de Ventana del Programa
       setTitle("Mini Gestor de Datos"); //Nombre de la ventana
       colocarbarram(); 
-      BG();
       
       GrupoPaneles.setVisible(true);
       definirpaneles(Mp);
@@ -266,12 +265,10 @@ public class Login extends JFrame implements ActionListener{
     
         GrupoPaneles.setViewportView(Pag);
     }
-  /*
+  
             //-------------------->>>>>>>Metodo Main<<<<<<<<<--------------------------------
     public static void main(String[] args) {
         Login L =new Login(); //Intanciamos la Clase Login
     L.setVisible(true); //Hacemos Visible su Ventana
     }
-
-*/
   }

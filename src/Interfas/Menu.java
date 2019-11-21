@@ -50,7 +50,7 @@ public class Menu extends JPanel implements ActionListener {
        BBusq_G = new JButton("Consultar"); 
        BMan_Usu = new JButton("Gestionar Usuarios"); 
        BMan_Publi = new JButton("Gestionar Publicaciones"); 
-       BMan_Pag = new JButton("Gestionar Paginas");
+       BMan_Pag = new JButton("Gestionar Redes");
      
        credi = new JButton("Creditos");
        cerrar = new JButton("Salir");
