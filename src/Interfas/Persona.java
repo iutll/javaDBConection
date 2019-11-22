@@ -1,14 +1,9 @@
 
 package Interfas;
 
-import com.mysql.jdbc.Connection;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.event.*;
+import java.sql.*;
 import javax.swing.*;
 
 /*
@@ -22,17 +17,17 @@ public class Persona extends JPanel implements ActionListener {
    private JTextField txtUsu,txtMail,txtClv,txtCI;
    public int ID_user;
    private JComboBox ListNivel;
-   public static final String URL = "jdbc:mysql://localhost:3306/prueba";
+   public static final String URL = "jdbc:mysql://localhost:3306/Mini-Gestor";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
    PreparedStatement ps;
    ResultSet rs;
-   
+   //------------------------------------
    public  Connection getConnection(){
         Connection con = null;
         try {
     
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("java.sql.Driver");
              
             con=(Connection) DriverManager.getConnection(URL,USERNAME,PASSWORD);
             JOptionPane.showMessageDialog(null,"Conectado a la base de datos :D");
@@ -42,7 +37,7 @@ public class Persona extends JPanel implements ActionListener {
       
      return con;
     }
-    //------------------------------------
+    
 
     public Persona(){
         
@@ -53,7 +48,7 @@ public class Persona extends JPanel implements ActionListener {
     
     private void initComponents(){
     
-      //----------->>>>>>>>>Etiquetas<<<<<<<<<<<------------
+  //----------->>>>>>>>>Etiquetas<<<<<<<<<<<------------
       JLabel title=new JLabel("¡¡Registro de Usuarios!!", SwingConstants.CENTER);
       title.setForeground(Color.DARK_GRAY);
       title.setBounds(170, 5, 250, 50);
@@ -68,80 +63,80 @@ public class Persona extends JPanel implements ActionListener {
       
       JLabel Mail=new JLabel("-> E-Mail:");
       Mail.setForeground(Color.BLACK);
-      Mail.setBounds(20, 80, 100, 50);
+      Mail.setBounds(20, 100, 100, 50);
       Mail.setFont(new Font("Dyuthi",Font.ITALIC, 17));
       add(Mail);
       
       JLabel Clv=new JLabel("-> Clave:");
       Clv.setForeground(Color.BLACK);
-      Clv.setBounds(350, 50, 100, 50);
+      Clv.setBounds(20, 150, 100, 50);
       Clv.setFont(new Font("Dyuthi",Font.ITALIC, 17));
       add(Clv);
       
       JLabel Nivel=new JLabel("-> Nivel:");
       Nivel.setForeground(Color.BLACK);
-      Nivel.setBounds(350, 80, 60, 50);
+      Nivel.setBounds(20, 200, 60, 50);
       Nivel.setFont(new Font("Dyuthi",Font.ITALIC, 17));
       add(Nivel);
       
       JLabel CI=new JLabel("-> Cedula:");
       CI.setForeground(Color.BLACK);
-      CI.setBounds(20, 110, 100, 50);
+      CI.setBounds(20, 250, 100, 50);
       CI.setFont(new Font("Dyuthi",Font.ITALIC, 17));
       add(CI);
       
       //----------->>>>>>>>>Cajas de Texto<<<<<<<<<<<------------  
       txtUsu = new JTextField();
-      txtUsu.setBounds(100, 65, 200, 20);
+      txtUsu.setBounds(100, 65, 300, 20);
       add(txtUsu);
       
       txtMail = new JTextField();
-      txtMail.setBounds(90, 95, 250, 20);
+      txtMail.setBounds(100, 110, 300, 20);
       add(txtMail);
       
       txtClv = new JTextField();
-      txtClv.setBounds(420, 65, 140, 20);
+      txtClv.setBounds(100, 160, 140, 20);
       add(txtClv);
       
       txtCI = new JTextField();
-      txtCI.setBounds(100, 125, 140, 20);
+      txtCI.setBounds(100, 260, 140, 20);
       add(txtCI);
       
       //----------->>>>>>>>>Lista Desplegable<<<<<<<<<<<------------
       String[] Niveles= {"Seleccione","1","2","3","4"};
       
       ListNivel=new JComboBox(Niveles);
-      ListNivel.setBounds(420, 95, 140, 20);
+      ListNivel.setBounds(100, 210, 140, 20);
       ListNivel.setSelectedItem("Seleccione"); //Selecciona el Primer Obj Mostrado
       add(ListNivel);
       
       //----------->>>>>>>>>Botones<<<<<<<<<<<------------
-      BUsu = new JButton("Buscar");
-      BUsu.setBounds(450, 120, 100, 30);
+      BUsu = new JButton("Buscar CI");
+      BUsu.setBounds(450, 250, 100, 30);
       BUsu.setEnabled(true);
       BUsu.addActionListener(this);
       add(BUsu);
       
       BGuardar = new JButton("Guardar");
-      BGuardar.setBounds(10, 240, 100, 30);
+      BGuardar.setBounds(30, 410, 100, 30);
       BGuardar.setEnabled(true);
       BGuardar.addActionListener(this);
       add(BGuardar);
       
       BModificar = new JButton("Modificar");
-      BModificar.setBounds(10, 280, 100, 30);
+      BModificar.setBounds(170, 410, 100, 30);
       BModificar.setEnabled(true);
       BModificar.addActionListener(this);
       add(BModificar);
       
       BLimpiar = new JButton("Limpiar");
-      BLimpiar.setBounds(10, 320, 100, 30);
+      BLimpiar.setBounds(320, 410, 100, 30);
       BLimpiar.setEnabled(true);
       BLimpiar.addActionListener(this);
       add(BLimpiar);
       
       BEliminar = new JButton("Eliminar");
-      BEliminar.setBounds(10, 360, 100, 30);
+      BEliminar.setBounds(490, 410, 100, 30);
       BEliminar.setEnabled(true);
       BEliminar.addActionListener(this);
       add(BEliminar);

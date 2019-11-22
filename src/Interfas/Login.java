@@ -5,10 +5,10 @@
  */
 package Interfas;
 
-import java.awt.Color;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 import javax.swing.*;
 
 //Creamos una Clase "Login" Y Hacemos que Herede Atributos
@@ -20,16 +20,33 @@ public class Login extends JFrame implements ActionListener{
      JScrollPane GrupoPaneles; //Contenedor de Paneles
      private final JButton acceder;
      private final JTextField usuari;
-     private final JTextField clav;
-     private final String u= "Admin"; //Usuario por Default
-     private final String c= "Admin"; //Clave Por Default
-     private String usu;
-     private String clv;
+     private final JPasswordField clav;
+     private final String u= "Admin", c= "Admin"; //Usuario-clave por Default
+     private String usu,clv;
      private JMenuBar mb; // Una barra de Menu
      private JMenuItem Busq_G,Man_Usu,Man_Publi,Man_Pag,cred,exit,Principio; //Accion de Barra Menu
      private int intentos=0;
      private boolean v=false;
+   public static final String URL = "jdbc:mysql://localhost:3306/mini-gestor";
+   public static final String USERNAME = "root";
+   public static final String PASSWORD = "";
+   PreparedStatement ps;
+   ResultSet rs;
      
+     public  Connection getConnection(){
+        Connection con = null;
+        try {
+    
+            Class.forName("java.sql.Driver");
+             
+            con=(Connection) DriverManager.getConnection(URL,USERNAME,PASSWORD);
+            JOptionPane.showMessageDialog(null,"Conectado a la base de datos :D");
+        } catch (Exception e) {
+            System.err.println("Error:" + e);
+        }
+      
+     return con;
+    }
      //-------------------->>>>>>>Instancias de Clases<<<<<<<<<--------------------------------
     Menu Mp =new Menu();
     Cons_General Cg=new Cons_General();
@@ -98,7 +115,7 @@ public class Login extends JFrame implements ActionListener{
        usuari.setBounds(80, 70, 100, 20);
        panel.add(usuari);
        
-       clav = new JTextField();
+       clav = new JPasswordField();
        clav.setBounds(80, 120, 100, 20);
        panel.add(clav);
        
@@ -170,9 +187,23 @@ public class Login extends JFrame implements ActionListener{
            
          usu = usuari.getText();
          clv = clav.getText();
-         
-    if(u.equals(usu) && c.equals(clv)){
-        v=false;
+            
+      
+    if(usu.equals("") && clv.equals("")){
+        JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña estan vacios\nIngrese los por favor.");
+        intentos++; v=true;}
+      
+    else if(usu.equals("")){
+        JOptionPane.showMessageDialog(this,"Usuario está vacio\nIngrese lo por favor.");
+        intentos++; v=true;
+        
+    }else if(clv.equals("")){
+        JOptionPane.showMessageDialog(this,"Contraseña está vacio\nIngrese lo por favor.");
+        intentos++; v=true;
+    
+    }
+    else if(ComprobarAcceso(usuari.getText(),clav.getText())){
+      v=false;
         
       panel.setVisible(false);
       this.setSize(600, 500); //Estabrecemos su Tamaño de Ventana del Programa
@@ -181,37 +212,14 @@ public class Login extends JFrame implements ActionListener{
       
       GrupoPaneles.setVisible(true);
       definirpaneles(Mp);
+     
+      } else {JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña no válidos\\nIngrese nuevamente.");}
     
-    }else if(usu.equals("") && clv.equals("")){
-        JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña estan vacios\nIngrese los por favor.");
-        intentos++; v=true;
-        
-    }else if(usu.equals("")){
-        JOptionPane.showMessageDialog(this,"Usuario está vacio\nIngrese lo por favor.");
-        intentos++; v=true;
-        
-    }else if(clv.equals("")){
-        JOptionPane.showMessageDialog(this,"Contraseña está vacio\nIngrese lo por favor.");
-        intentos++; v=true;
-        
-    }else if(usu.compareTo(u)!=0 && clv.compareTo(c)!=0){
-        JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña no válidos\nIngrese nuevamente.");
-        intentos++; v=true;
-
-    }else if(usu.compareTo(u)!=0){
-        JOptionPane.showMessageDialog(this,"Usuario no válido\nIngrese nuevamente.");
-        intentos++; v=true;
-        
-    }else if(clv.compareTo(c)!=0){
-        JOptionPane.showMessageDialog(this,"Contraseña no válida\nIngrese nuevamente."); 
-        intentos++; v=true; }
-         
     if (intentos==3 && v==true){ 
          JOptionPane.showMessageDialog(this,"Ha Superado el Limite de Intentos Fallidos(3/3).\nCerraremos Automaticamente Nuestro Sistema.");
         System.exit(0); }
     }
-  
-  
+
   //--------Acciones de Menu----------
        if (ae.getSource()==Principio){
             GrupoPaneles.setVisible(true);
@@ -264,6 +272,27 @@ public class Login extends JFrame implements ActionListener{
     public void definirpaneles(Pagina Pag){
     
         GrupoPaneles.setViewportView(Pag);
+    }
+    
+    //Metodo para Comprobar Acceso de Usuario Administrador BDD
+    private boolean ComprobarAcceso(String usu,String clv){
+        Connection con = null;
+       int sw=0;
+        
+        try{
+            con = getConnection();
+            ps = con.prepareStatement("SELECT * FROM usuario WHERE usuario='"+usu+"'and clave='"+clv+"'");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                if(rs.getString(1)==null) sw=0;
+                else sw=1;
+            
+            }
+        }catch(SQLException e){
+        JOptionPane.showMessageDialog(null, "Error SQL"+e);
+        
+        } if(sw==1) return true;
+        else return false;
     }
   
             //-------------------->>>>>>>Metodo Main<<<<<<<<<--------------------------------

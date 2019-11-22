@@ -2,13 +2,8 @@
 package Interfas;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.event.*;
+import java.sql.*;
 import javax.swing.*;
 
 /**
@@ -19,7 +14,7 @@ public class Pagina extends JPanel implements ActionListener {
     //--------Atributos Globales----------
    private JButton BB,BAnadir,BGuardar,BModificar,BLimpiar,BEliminar;
    private JTextField txtBr,txtUsu,txtInst,txtFace,txtTwi;
-   public static final String URL = "jdbc:mysql://localhost:3306/prueba";
+   public static final String URL = "jdbc:mysql://localhost:3306/Mini-Gestor";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
    // id de la publicacion
@@ -31,7 +26,7 @@ public class Pagina extends JPanel implements ActionListener {
           Connection con = null;
      try {
     
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("java.sql.Driver");
              
             con=(Connection) DriverManager.getConnection(URL,USERNAME,PASSWORD);
               JOptionPane.showMessageDialog(this,"Conectado a la base de datos...");
@@ -74,17 +69,9 @@ public class Pagina extends JPanel implements ActionListener {
       Usuario.setFont(new Font("Dyuthi",Font.ITALIC, 18));
       add(Usuario);
       
-      JLabel Face =new JLabel(new ImageIcon("facebook.png"));
-      Face.setBounds(10,150,50,50);
+      JLabel Face =new JLabel(new ImageIcon("Redes.png"));
+      Face.setBounds(400,190,200,130);
       add(Face);
-      
-      JLabel Inst =new JLabel(new ImageIcon("Instagram.png"));
-      Inst.setBounds(10,210,50,50);
-      add(Inst);
-      
-      JLabel Twit =new JLabel(new ImageIcon("twitter.png"));
-      Twit.setBounds(10,270,50,50);
-      add(Twit);
       
       //----------->>>>>>>>>Cajas de Texto<<<<<<<<<<<------------ 
       txtBr = new JTextField();
@@ -96,20 +83,6 @@ public class Pagina extends JPanel implements ActionListener {
       txtUsu.setEditable(false);
       add(txtUsu);
       
-      txtFace = new JTextField();
-      txtFace.setBounds(90, 160, 315, 30);
-      txtFace.setEditable(false);
-      add(txtFace);
-      
-      txtInst = new JTextField();
-      txtInst.setBounds(90, 220, 315, 30);
-      txtInst.setEditable(false);
-      add(txtInst);
-      
-      txtTwi = new JTextField();
-      txtTwi.setBounds(90, 280, 315, 30);
-      txtTwi.setEditable(false);
-      add(txtTwi);
     
       //----------->>>>>>>>>Botones<<<<<<<<<<<------------
       BB = new JButton("Buscar");
@@ -118,26 +91,32 @@ public class Pagina extends JPanel implements ActionListener {
       BB.addActionListener(this);
       add(BB);
       
+       BAnadir = new JButton("Nueva");
+      BAnadir.setBounds(10, 410, 100, 30);
+      BAnadir.setEnabled(true);
+      BAnadir.addActionListener(this);
+      add(BAnadir);
+      
       BGuardar = new JButton("Guardar");
-      BGuardar.setBounds(30, 410, 100, 30);
+      BGuardar.setBounds(130, 410, 100, 30);
       BGuardar.setEnabled(true);
       BGuardar.addActionListener(this);
       add(BGuardar);
       
       BModificar = new JButton("Modificar");
-      BModificar.setBounds(170, 410, 100, 30);
+      BModificar.setBounds(250, 410, 100, 30);
       BModificar.setEnabled(true);
       BModificar.addActionListener(this);
       add(BModificar);
       
       BLimpiar = new JButton("Limpiar");
-      BLimpiar.setBounds(320, 410, 100, 30);
+      BLimpiar.setBounds(370, 410, 100, 30);
       BLimpiar.setEnabled(true);
       BLimpiar.addActionListener(this);
       add(BLimpiar);
       
       BEliminar = new JButton("Eliminar");
-      BEliminar.setBounds(490, 410, 100, 30);
+      BEliminar.setBounds(480, 410, 100, 30);
       BEliminar.setEnabled(true);
       BEliminar.addActionListener(this);
       add(BEliminar);
@@ -154,6 +133,10 @@ public class Pagina extends JPanel implements ActionListener {
            buscarRedes();
 
        }
+        if (ae.getSource()==BAnadir){
+            JOptionPane.showMessageDialog(this,"Añadiendo Red... ");
+    
+        }
        
        if (ae.getSource()==BGuardar){
             JOptionPane.showMessageDialog(this,"Guardando... ");
@@ -188,9 +171,9 @@ public class Pagina extends JPanel implements ActionListener {
     
     // **********  buscar redes  **********
     private void buscarRedes() {                                                
-    com.mysql.jdbc.Connection con = null;
+    java.sql.Connection con = null;
        try{
-      con = (com.mysql.jdbc.Connection) getConnection();
+      con = (java.sql.Connection) getConnection();
      
       ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ?");
       ps.setString(1,txtBr.getText());
@@ -222,10 +205,10 @@ public class Pagina extends JPanel implements ActionListener {
     
     // **********  actualizar o crear redes **********
     private void actualizarOCrearRedes() {                                             
-       com.mysql.jdbc.Connection con = null;
+       java.sql.Connection con = null;
     
         try{
-        con = (com.mysql.jdbc.Connection) getConnection();
+        con = (java.sql.Connection) getConnection();
         
         // ver si el usuario existe 
         ps = con.prepareStatement("SELECT * FROM usuario WHERE cedula = ?");
@@ -248,7 +231,7 @@ public class Pagina extends JPanel implements ActionListener {
                int res =  ps.executeUpdate();
 
                if(res > 0){
-                    JOptionPane.showMessageDialog(null,"pagina modificada");
+                    JOptionPane.showMessageDialog(null,"Red modificada");
                     LimpiarCajas();
                }else{
                     JOptionPane.showMessageDialog(null,"Error al modificar");
@@ -293,10 +276,10 @@ public class Pagina extends JPanel implements ActionListener {
     
     // **********  borrar registro de red **********
     private void eliminarRed() {                                            
-           com.mysql.jdbc.Connection con = null;
+           java.sql.Connection con = null;
 
            try{
-           con = (com.mysql.jdbc.Connection) getConnection();
+           con = (java.sql.Connection) getConnection();
            ps = con.prepareStatement("DELETE FROM redessociales WHERE cedula=?");
            ps.setString(1,(txtBr.getText()));
 

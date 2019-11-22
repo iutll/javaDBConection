@@ -3,16 +3,20 @@ package Interfas;
 /*
  * @author jose-dasilva
  */
-//import com.mysql.jdbc.Connection;
+import static Interfas.Login.PASSWORD;
+import static Interfas.Login.URL;
+import static Interfas.Login.USERNAME;
+import java.sql.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 import java.net.URL;
-import java.sql.*;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class Cons_General extends JPanel implements ActionListener{
     
@@ -22,27 +26,26 @@ public class Cons_General extends JPanel implements ActionListener{
    private JTable AreaImpr;
     //------------------------------------
     
-   public static final String URL = "jdbc:mysql://localhost:3306/prueba";
+   public static final String URL = "jdbc:mysql://localhost:3306/Mini-Gestor";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
    PreparedStatement ps;
    ResultSet rs;
    
-   public  Connection getConnection(){
-          Connection con = null;
-     try {
+ public  Connection getConnection(){
+        Connection con = null;
+        try {
     
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("java.sql.Driver");
              
             con=(Connection) DriverManager.getConnection(URL,USERNAME,PASSWORD);
-              JOptionPane.showMessageDialog(this,"Conectado a la base de datos...");
+            JOptionPane.showMessageDialog(null,"Conectado a la base de datos :D");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Error:" + e);
+            System.err.println("Error:" + e);
         }
       
      return con;
     }
-   
    /*
    ================================================================================
    
@@ -162,10 +165,10 @@ public class Cons_General extends JPanel implements ActionListener{
     
     // buscar usuario
     private void buscarUsuario(){
-        com.mysql.jdbc.Connection con = null;
+        java.sql.Connection con = null;
        
        try{
-      con = (com.mysql.jdbc.Connection) getConnection();
+      con = (java.sql.Connection) getConnection();
       ps = con.prepareStatement("SELECT * FROM usuario WHERE cedula = ?" );
       ps.setString(1,txtCI.getText());
       rs = ps.executeQuery();
@@ -209,9 +212,9 @@ public class Cons_General extends JPanel implements ActionListener{
     // buscar prublicaciones
     private void buscarPublicaciones() {                                                     
         // TODO add your handling code here:
-        com.mysql.jdbc.Connection con = null;
+        java.sql.Connection con = null;
        try{
-      con = (com.mysql.jdbc.Connection) getConnection();
+      con = (java.sql.Connection) getConnection();
       ps = con.prepareStatement("SELECT * FROM publicacion WHERE cedulauser=?");
             ps.setString(1,txtCI.getText());
       rs = ps.executeQuery();
@@ -250,9 +253,9 @@ public class Cons_General extends JPanel implements ActionListener{
     
     // buscar redes
     private void buscarRedes() {                                                
-    com.mysql.jdbc.Connection con = null;
+    java.sql.Connection con = null;
        try{
-      con = (com.mysql.jdbc.Connection) getConnection();
+      con = (java.sql.Connection) getConnection();
      
       ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ?");
         ps.setString(1,txtCI.getText());
