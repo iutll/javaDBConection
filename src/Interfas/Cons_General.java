@@ -3,6 +3,7 @@ package Interfas;
 /*
  * @author jose-dasilva
  */
+
 import java.sql.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,6 +12,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class Cons_General extends JPanel implements ActionListener{
     
@@ -26,21 +30,20 @@ public class Cons_General extends JPanel implements ActionListener{
    PreparedStatement ps;
    ResultSet rs;
    
-   public  Connection getConnection(){
-          Connection con = null;
-     try {
-    
-            Class.forName("Java.sql.Driver");
-             
+ public  Connection getConnection(){
+        Connection con = null;
+        try {
+
+            Class.forName("java.sql.Driver");
+
             con=(Connection) DriverManager.getConnection(URL,USERNAME,PASSWORD);
-              JOptionPane.showMessageDialog(this,"Conectado a la base de datos...");
+            JOptionPane.showMessageDialog(null,"Conectado a la base de datos :D");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Error:" + e);
+            System.err.println("Error:" + e);
         }
       
      return con;
     }
-   
    /*
    ================================================================================
    

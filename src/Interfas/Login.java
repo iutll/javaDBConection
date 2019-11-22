@@ -17,7 +17,7 @@ public class Login extends JFrame implements ActionListener{
    
     //-------------------->>>>>>>Atributos Globales<<<<<<<<<--------------------------------
      private final JPanel panel; //Creamos un Paneles
-     JScrollPane GrupoPaneles; //Contenedor de Paneles
+     public static JScrollPane GrupoPaneles; //Contenedor de Paneles
      private final JButton acceder;
      private final JTextField usuari;
      private final JPasswordField clav;
@@ -30,6 +30,12 @@ public class Login extends JFrame implements ActionListener{
    public static final String URL = "jdbc:mysql://localhost:3306/Mini-Gestor";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
+        //-------------------->>>>>>>Instancias de Clases<<<<<<<<<--------------------------------
+    public static Menu Mp =new Menu();
+    public static Cons_General Cg=new Cons_General();
+    public static Persona Usu=new Persona();
+    public static Publicacion Publi=new Publicacion();
+    public static Pagina Pag=new Pagina();
    PreparedStatement ps;
    ResultSet rs;
      
@@ -47,12 +53,7 @@ public class Login extends JFrame implements ActionListener{
       
      return con;
     }
-     //-------------------->>>>>>>Instancias de Clases<<<<<<<<<--------------------------------
-    Menu Mp =new Menu();
-    Cons_General Cg=new Cons_General();
-    Persona Usu=new Persona();
-    Publicacion Publi=new Publicacion();
-    Pagina Pag=new Pagina();
+
     
    //-------------------->>>>>>>Metodo Constructor<<<<<<<<<--------------------------------
    public Login(){
@@ -63,12 +64,6 @@ public class Login extends JFrame implements ActionListener{
       setLocationRelativeTo(null); //Ejecuta la Ventana Justo en El centro de la Pantalla
       //getContentPane().setBackground(Color.gray); //Agregamos un Color a ventana
       setDefaultCloseOperation(EXIT_ON_CLOSE);
-      
-      //Configuro El Contenedor de Paneles
-      GrupoPaneles=new JScrollPane();
-      GrupoPaneles.setBounds(0, 0, 600, 500);
-      GrupoPaneles.setVisible(false);
-      add(GrupoPaneles);
       
       //Panel
       panel = new JPanel(); //Instanciamos Panel
@@ -209,7 +204,11 @@ public class Login extends JFrame implements ActionListener{
       this.setSize(600, 500); //Estabrecemos su Tamaño de Ventana del Programa
       setTitle("Mini Gestor de Datos"); //Nombre de la ventana
       colocarbarram(); 
-      
+      //Configuro El Contenedor de Paneles
+      GrupoPaneles=new JScrollPane();
+      GrupoPaneles.setBounds(0, 0, 600, 500);
+      GrupoPaneles.setVisible(false);
+      this.add(GrupoPaneles);
       GrupoPaneles.setVisible(true);
       definirpaneles(Mp);
      
@@ -226,13 +225,13 @@ public class Login extends JFrame implements ActionListener{
             definirpaneles(Mp);
         }
             
-        if (ae.getSource()==Busq_G){   BG();   }
+        if (ae.getSource()==Busq_G){   BG(this);   }
         
-        if (ae.getSource()==Man_Usu){  USU();  }
+        if (ae.getSource()==Man_Usu){  USU(this);  }
             
-        if (ae.getSource()==Man_Publi){ PB();  }
+        if (ae.getSource()==Man_Publi){ PB(this);  }
         
-        if (ae.getSource()==Man_Pag){ PG();    }
+        if (ae.getSource()==Man_Pag){ PG(this);    }
         
          if ((ae.getSource()==cred)||(ae.getSource()==Mp.credi)){
         JOptionPane.showMessageDialog(this,"--->>>Creditos<<<---"
@@ -244,13 +243,23 @@ public class Login extends JFrame implements ActionListener{
         }
     }
     //Busqueda General
-  public void BG(){   GrupoPaneles.setVisible(true); definirpaneles(Cg);  }
+  public void BG(Login fr){  
+      fr.GrupoPaneles.setVisible(true);
+      fr.definirpaneles(Cg); 
+  }
     //Registro Usuario
-  public void USU(){  GrupoPaneles.setVisible(true); definirpaneles(Usu); }
+  public void USU(Login fr){  
+      fr.GrupoPaneles.setVisible(true); 
+      fr.definirpaneles(Usu); }
     //Registro Publicaciones
-  public void PB(){   definirpaneles(Publi); GrupoPaneles.setVisible(true);}
+  public void PB(Login fr){   
+      fr.GrupoPaneles.setVisible(true);
+      fr.definirpaneles(Publi);
+  }
     //Registro Pagina
-  public void PG(){   GrupoPaneles.setVisible(true); definirpaneles(Pag);  }
+  public void PG(Login fr){   
+      fr.GrupoPaneles.setVisible(true); 
+      fr.definirpaneles(Pag);  }
     
   //-------------------->>>>>>>Sobrecarga de Metodos<<<<<<<<<--------------------------------
     public void definirpaneles(Menu Mp){
@@ -298,6 +307,6 @@ public class Login extends JFrame implements ActionListener{
             //-------------------->>>>>>>Metodo Main<<<<<<<<<--------------------------------
     public static void main(String[] args) {
         Login L =new Login(); //Intanciamos la Clase Login
-    L.setVisible(true); //Hacemos Visible su Ventana
+        L.setVisible(true); //Hacemos Visible su Ventana
     }
   }

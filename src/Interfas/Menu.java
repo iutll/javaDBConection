@@ -83,6 +83,15 @@ public class Menu extends JPanel implements ActionListener {
        credi.setEnabled(true);
        cerrar.setEnabled(true);
        
+       //agrego acciones a botones  
+       BBusq_G.addActionListener(this);
+       BMan_Usu.addActionListener(this);
+       BMan_Publi.addActionListener(this);
+       BMan_Pag.addActionListener(this);
+   
+       credi.addActionListener(this);
+       cerrar.addActionListener(this);
+       
        //Agregamos Botones al Panel
        add(BBusq_G); 
        add(BMan_Usu);
@@ -92,27 +101,19 @@ public class Menu extends JPanel implements ActionListener {
        add(credi);
        add(cerrar);
        
-           //agrego acciones a botones  
-       BBusq_G.addActionListener(this);
-       BMan_Usu.addActionListener(this);
-       BMan_Publi.addActionListener(this);
-       BMan_Pag.addActionListener(this);
-   
-       credi.addActionListener(this);
-       cerrar.addActionListener(this);
    }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         Login L=new Login();    
         
-        if (ae.getSource()==BBusq_G){ L.BG();  }
+        if (ae.getSource()==BBusq_G){ L.BG(L);  }
         
-        if (ae.getSource()==BMan_Usu){ L.USU();}
+        if (ae.getSource()==BMan_Usu){ L.USU(L);}
         
-        if (ae.getSource()==BMan_Publi){ L.PB();}
+        if (ae.getSource()==BMan_Publi){ L.PB(L);}
         
-        if (ae.getSource()==BMan_Pag){ L.PG();}
+        if (ae.getSource()==BMan_Pag){ L.PG(L);}
         
         if (ae.getSource()==credi){
              JOptionPane.showMessageDialog(this,"--->>>Creditos<<<---"
