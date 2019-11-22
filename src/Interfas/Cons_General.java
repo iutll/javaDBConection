@@ -3,9 +3,12 @@ package Interfas;
 /*
  * @author jose-dasilva
  */
+<<<<<<< HEAD
 import static Interfas.Login.PASSWORD;
 import static Interfas.Login.URL;
 import static Interfas.Login.USERNAME;
+=======
+>>>>>>> 34ebbf75c9e003fdf24caeae461b73267e2759d3
 import java.sql.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -36,7 +39,11 @@ public class Cons_General extends JPanel implements ActionListener{
         Connection con = null;
         try {
     
+<<<<<<< HEAD
             Class.forName("java.sql.Driver");
+=======
+            Class.forName("Java.sql.Driver");
+>>>>>>> 34ebbf75c9e003fdf24caeae461b73267e2759d3
              
             con=(Connection) DriverManager.getConnection(URL,USERNAME,PASSWORD);
             JOptionPane.showMessageDialog(null,"Conectado a la base de datos :D");
