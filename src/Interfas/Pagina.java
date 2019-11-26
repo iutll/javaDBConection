@@ -4,7 +4,9 @@ package Interfas;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.util.Arrays;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author jose-dasilva
@@ -13,7 +15,8 @@ public class Pagina extends JPanel implements ActionListener {
     
     //--------Atributos Globales----------
    private JButton BB,BAnadir,BGuardar,BModificar,BLimpiar,BEliminar;
-   private JTextField txtBr,txtUsu,txtInst,txtFace,txtTwi;
+   private JTextField txtBr,txtUsu,txtRed, txtUrl;
+   private JTable AreaImpr;
    public static final String URL = "jdbc:mysql://localhost:3306/Mini-Gestor";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
@@ -69,6 +72,18 @@ public class Pagina extends JPanel implements ActionListener {
       Usuario.setFont(new Font("Dyuthi",Font.ITALIC, 18));
       add(Usuario);
       
+      JLabel nombreRed=new JLabel("nombre red:", SwingConstants.CENTER);
+      nombreRed.setForeground(Color.BLACK);
+      nombreRed.setBounds(0, 135, 100, 40);
+      nombreRed.setFont(new Font("Dyuthi",Font.ITALIC, 18));
+      add(nombreRed);
+      
+      JLabel url=new JLabel("Url:", SwingConstants.CENTER);
+      url.setForeground(Color.BLACK);
+      url.setBounds(0, 175, 100, 40);
+      url.setFont(new Font("Dyuthi",Font.ITALIC, 18));
+      add(url);
+      
       JLabel Face =new JLabel(new ImageIcon("Redes.png"));
       Face.setBounds(400,190,200,130);
       add(Face);
@@ -79,9 +94,27 @@ public class Pagina extends JPanel implements ActionListener {
       add(txtBr);
       
       txtUsu = new JTextField();
-      txtUsu.setBounds(90, 95, 315, 20);
+      txtUsu.setBounds(100, 95, 315, 20);
       txtUsu.setEditable(false);
       add(txtUsu);
+      
+      txtRed = new JTextField();
+      txtRed.setBounds(100, 145, 315, 20);
+      txtRed.setEditable(false);
+      add(txtRed);
+      
+      txtUrl = new JTextField();
+      txtUrl.setBounds(100, 185, 315, 20);
+      txtUrl.setEditable(false);
+      add(txtUrl);
+      
+      // ----------->>>>>>>>>>>>>>JTable para ver las redes sociales del usuario<<<<<<<<<<<<<<<<--------------
+      AreaImpr=new JTable();
+      JScrollPane scrollPane= new  JScrollPane(AreaImpr);
+      scrollPane.setBounds(50, 220, 250, 120);
+      scrollPane.setBackground(Color.LIGHT_GRAY);
+      scrollPane.setForeground(Color.BLACK);
+      add(scrollPane);
       
     
       //----------->>>>>>>>>Botones<<<<<<<<<<<------------
@@ -91,20 +124,20 @@ public class Pagina extends JPanel implements ActionListener {
       BB.addActionListener(this);
       add(BB);
       
-       BAnadir = new JButton("Nueva");
-      BAnadir.setBounds(10, 410, 100, 30);
+       BAnadir = new JButton("Agregar");
+      BAnadir.setBounds(5, 410, 100, 30);
       BAnadir.setEnabled(true);
       BAnadir.addActionListener(this);
       add(BAnadir);
       
-      BGuardar = new JButton("Guardar");
-      BGuardar.setBounds(130, 410, 100, 30);
+      BGuardar = new JButton("Actualizar");
+      BGuardar.setBounds(115, 410, 100, 30);
       BGuardar.setEnabled(true);
       BGuardar.addActionListener(this);
       add(BGuardar);
       
-      BModificar = new JButton("Modificar");
-      BModificar.setBounds(250, 410, 100, 30);
+      BModificar = new JButton("Modificar una red");
+      BModificar.setBounds(220, 410, 145, 30);
       BModificar.setEnabled(true);
       BModificar.addActionListener(this);
       add(BModificar);
@@ -135,7 +168,7 @@ public class Pagina extends JPanel implements ActionListener {
        }
         if (ae.getSource()==BAnadir){
             JOptionPane.showMessageDialog(this,"Añadiendo Red... ");
-    
+            actualizarOCrearRedes();
         }
        
        if (ae.getSource()==BGuardar){
@@ -144,10 +177,8 @@ public class Pagina extends JPanel implements ActionListener {
     
         }
         if (ae.getSource()==BModificar){
-            JOptionPane.showMessageDialog(this,"Modifica la Publicación... ");
+            JOptionPane.showMessageDialog(this,"escribe el nombre de la red y luego su nueva url");
             hacerEditable(true);
-
-       
         }
         if (ae.getSource()==BLimpiar){
             LimpiarCajas();
@@ -178,22 +209,27 @@ public class Pagina extends JPanel implements ActionListener {
       ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ?");
       ps.setString(1,txtBr.getText());
       rs = ps.executeQuery();
-      
+        // agregar headers
+        String[] titulos = {"Nombre red","Url"};
+        DefaultTableModel tableModel = new DefaultTableModel();
+        agregarHeaders(AreaImpr, tableModel, titulos);
+        
       if(rs.first()){
-          
-                   txtFace.setText(rs.getString("facebook"));
-                   txtInst.setText(rs.getString("instagram"));
-                   txtTwi.setText(rs.getString("twitter"));
-                   // asignar el id de redes
-                   ID_redes = rs.getInt("id_redes");
-                   // buscar nombre de usuario con la cedula
-                   ps = con.prepareStatement("SELECT * FROM usuario WHERE cedula = ?");
-                   ps.setString(1,txtBr.getText());
-                   rs = ps.executeQuery();
-                   if(rs.next()) txtUsu.setText(rs.getString("usuario"));
+          do{
+              String[] valores = {
+                  rs.getString("Nombre_red"),
+                  rs.getString("Url"),
+              };
+              agregarFilas(tableModel, valores);
+          }while(rs.next());
+          // mostrar usuario
+          mostrarUsuario(txtUsu, txtBr.getText(), false);
+          hacerEditable(true);
       }else{
       
         JOptionPane.showMessageDialog(null,"No existen redes asociadas a esa cedula \n puedes agregarlas");
+        // mostrar usuario
+        mostrarUsuario(txtUsu, txtBr.getText(), false);
         // hacer editable para agregar redes a usuario
         hacerEditable(true);
       }
@@ -214,51 +250,72 @@ public class Pagina extends JPanel implements ActionListener {
         ps = con.prepareStatement("SELECT * FROM usuario WHERE cedula = ?");
         ps.setString(1,txtBr.getText());
         rs = ps.executeQuery();
-        // si existe comprobar si tiene un registro de redes sociales, si no, registrar uno nuevo
+        // si el usuario existe
         if(rs.first()){
-            // ver si tiene registro de redes sociales
-            ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ?");
-            ps.setString(1,txtBr.getText());
-            rs = ps.executeQuery();
-            // tiene registro, actualizar
-            if(rs.first()){
-                ps = con.prepareStatement("UPDATE redessociales SET twitter=?, instagram=?, facebook=? WHERE id_redes=?");
-                ps.setString(1,txtTwi.getText());
-                ps.setString(2,txtInst.getText());
-                ps.setString(3,txtFace.getText());
-                ps.setString(4,Integer.toString(ID_redes) );
-               // respuesta del servidor
-               int res =  ps.executeUpdate();
-
-               if(res > 0){
-                    JOptionPane.showMessageDialog(null,"Red modificada");
-                    LimpiarCajas();
-               }else{
-                    JOptionPane.showMessageDialog(null,"Error al modificar");
-                    LimpiarCajas();
+            // redes sociales aceptadas
+            String[] allAceptedSocialNetworks = {
+                "snapchat",
+                "linkedin",
+                "twitter",
+                "facebook",
+                "Instagram",
+                "youtube",
+                "tiktok",
+                "yahoo"
+            };
+            // comprobar que la red que quiere agregar o modificar esta entre las redes acetadas
+            String redActual = txtRed.getText(); // texto en JTextField
+            boolean aceptada = false;
+            for( String red : allAceptedSocialNetworks){
+                if(redActual.equals(red)){ 
+                    aceptada = true;
+                    break;
                 }
             }
-            // no tiene registro, insertar
+            // si es una red aceptada
+            if(aceptada){
+                // comprobar si el usuario ya tiene una de estas redes o va a agregar una nueva
+                try{
+                    // query para ver si ya tiene esa red social agregada y de ser asi, modificarla, si no, agregarla
+                    ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ? AND Nombre_red = ?");
+                    ps.setString(1,txtBr.getText());
+                    ps.setString(2,redActual);
+                    rs = ps.executeQuery();
+                    // si existe la red, actualizarla
+                    if(rs.first()){
+                        int ID_REDES = rs.getInt("id_redes"); // id del registro red que se esta actualizando
+                        ps = con.prepareStatement("UPDATE redessociales SET Nombre_red = ?, Url = ? WHERE id_redes = ?");
+                        ps.setString(1,redActual);
+                        ps.setString(2,txtUrl.getText() );
+                        ps.setString(3, Integer.toString(ID_REDES) );
+                        ps.executeUpdate();
+                        JOptionPane.showMessageDialog(null,"red "+ redActual +" actualizada");
+                    }
+                    // no existe, agregarla
+                    else{
+                        // valores del usuario
+                        String[] valoresUser = mostrarUsuario(txtUsu, txtBr.getText(), true);
+                        
+                        ps = con.prepareStatement("INSERT INTO redessociales (Nombre_red, Url, usuario, cedula, correo, nivel_user) VALUES (?,?,?,?,?,?)");
+                        ps.setString(1,redActual );
+                        ps.setString(2, txtUrl.getText() );
+                        ps.setString(3, valoresUser[0]);
+                        ps.setString(4, txtBr.getText());
+                        ps.setString(5, valoresUser[1]);
+                        ps.setString(6, valoresUser[2]);
+                        
+                        ps.executeUpdate();
+                        JOptionPane.showMessageDialog(null,"red "+ redActual +" agregada");
+                    }
+                }
+                catch(SQLException err){
+                    System.out.println(err);
+                }
+            }
+            // no es una red aceptada
             else{
-                
-                ps = con.prepareStatement("INSERT INTO redessociales (cedula, twitter, facebook, instagram) VALUES(?,?,?,?) ");
-                ps.setString(1,txtBr.getText());
-                ps.setString(2,txtTwi.getText());
-                ps.setString(3,txtFace.getText());
-                ps.setString(4,txtInst.getText());
-                
-                int res =  ps.executeUpdate();
-
-                if(res > 0){
-                  JOptionPane.showMessageDialog(null,"Usuario Registrado");
-                  LimpiarCajas();
-                }else{
-                 JOptionPane.showMessageDialog(null,"Error al Registrar");
-                  LimpiarCajas();
-                }
-                
+                JOptionPane.showMessageDialog(null, "la red "+redActual+" no es una red aceptada, las redes aceptadas son: "+Arrays.toString(allAceptedSocialNetworks));
             }
-            
              
         }
         // no existe el usuario
@@ -277,28 +334,42 @@ public class Pagina extends JPanel implements ActionListener {
     // **********  borrar registro de red **********
     private void eliminarRed() {                                            
            java.sql.Connection con = null;
+           
+            // obtener valor de red en la fila de la tabla
+            int row = AreaImpr.getSelectedRow();
+            String nombreRed;
+            if(row >= 0){
+               nombreRed = AreaImpr.getModel().getValueAt(row, 0).toString();
+               
+               try{
+                    con = (java.sql.Connection) getConnection();
+                    ps = con.prepareStatement("DELETE FROM redessociales WHERE cedula=? AND Nombre_red = ?");
+                    ps.setString(1, txtBr.getText() );
+                    ps.setString(2,nombreRed);
 
-           try{
-           con = (java.sql.Connection) getConnection();
-           ps = con.prepareStatement("DELETE FROM redessociales WHERE cedula=?");
-           ps.setString(1,(txtBr.getText()));
+                    int res =  ps.executeUpdate();
 
-          int res =  ps.executeUpdate();
-
-          if(res > 0){
-            JOptionPane.showMessageDialog(null,"Usuario eliminado");
-            LimpiarCajas();
-              hacerEditable(false);
-          }else{
-           JOptionPane.showMessageDialog(null,"Error al eliminar");
-            LimpiarCajas();
-            hacerEditable(false);
-          }
-          
-            con.close();
-            }catch(SQLException e){
-               System.out.println(e);
+                    if(res > 0){
+                        JOptionPane.showMessageDialog(null,"red "+ nombreRed +" eliminada del registro");
+                        LimpiarCajas();
+                        hacerEditable(false);
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Error al eliminar");
+                        LimpiarCajas();
+                        hacerEditable(false);
+                    }
+                    con.close();
+                }
+                catch(SQLException e){
+                    System.out.println(e);
+                }
+               
             }
+            // no ha seleccionado tabla aun
+            else{
+                JOptionPane.showMessageDialog(null,"selecciona una red haciendo clic en ella, luego oprime eliminar");
+            }
+           
     }
     
     
@@ -310,15 +381,65 @@ public class Pagina extends JPanel implements ActionListener {
     void LimpiarCajas(){
         txtBr.setText("");
         txtUsu.setText("");
-        txtTwi.setText("");
-        txtInst.setText("");
-        txtFace.setText("");
+        txtRed.setText("");
+        txtUrl.setText("");
+        AreaImpr.removeAll();
     }
     
     // hacer editable las redes
     void hacerEditable(boolean visible){
-        txtTwi.setEditable(visible);
-        txtInst.setEditable(visible);
-        txtFace.setEditable(visible);
+        txtRed.setEditable(visible);
+        txtUrl.setEditable(visible);
+    }
+    
+    /*
+    agregrar filas y clomnas a la tabla
+    */
+    
+    void agregarHeaders( JTable AreaImpr , DefaultTableModel tableModel, String[] valores){
+        // agregar columnas y su valor a el modelo
+        System.out.println("entro en agregar headers #########################");
+           for(String columnName : valores){
+                tableModel.addColumn(columnName);
+            }
+           // setear modelo en la tabla
+           AreaImpr.setModel(tableModel);
+    }
+    
+    void agregarFilas(DefaultTableModel tableModel, String[] valores){
+        tableModel.addRow(valores);
+    }
+    
+    // ************** mostrar usuario en JTextField ******************
+    private String[] mostrarUsuario(JTextField campoUsuario, String cedula, boolean nombreSolamente){
+       java.sql.Connection con = null;
+       try{
+            con = (java.sql.Connection) getConnection();
+            ps = con.prepareStatement("SELECT * FROM usuario WHERE cedula = ?");
+            ps.setString(1,cedula);
+            rs = ps.executeQuery();
+            System.out.println("la cedula!!!!!!!!!!!!!!!  " + cedula);
+        
+      if(rs.first()){
+          if(!nombreSolamente){
+            // mostrar nombre de usuario
+            campoUsuario.setText(rs.getString("usuario"));
+          }
+          else{
+              String[] valores = {
+                  rs.getString("usuario"),
+                  rs.getString("correo"),
+                  rs.getString("nivel")
+              };
+              return valores;
+          }
+          
+      }else{
+        JOptionPane.showMessageDialog(null,"No existe usuario con esa cedula");
+      }
+       }catch(Exception e){
+            System.out.println("error " + e);
+       }
+       return null;
     }
 }

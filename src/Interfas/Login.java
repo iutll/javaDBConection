@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.Arrays;
 import javax.swing.*;
 
 //Creamos una Clase "Login" Y Hacemos que Herede Atributos
@@ -182,6 +183,7 @@ public class Login extends JFrame implements ActionListener{
            
          usu = usuari.getText();
          clv = clav.getText();
+         clv = Arrays.toString(clav.getPassword());
             
       
     if(usu.equals("") && clv.equals("")){
@@ -212,7 +214,11 @@ public class Login extends JFrame implements ActionListener{
       GrupoPaneles.setVisible(true);
       definirpaneles(Mp);
      
-      } else {JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña no válidos\\nIngrese nuevamente.");}
+      } else {
+        System.out.println("");
+        JOptionPane.showMessageDialog(this,"Usuario y/o Contraseña no válidos\\nIngrese nuevamente.");
+    
+    }
     
     if (intentos==3 && v==true){ 
          JOptionPane.showMessageDialog(this,"Ha Superado el Limite de Intentos Fallidos(3/3).\nCerraremos Automaticamente Nuestro Sistema.");
