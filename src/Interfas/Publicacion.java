@@ -1,6 +1,9 @@
 
 package Interfas;
 
+import static Interfas.Pagina.PASSWORD;
+import static Interfas.Pagina.URL;
+import static Interfas.Pagina.USERNAME;
 import java.sql.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,7 +20,24 @@ public class Publicacion extends JPanel implements ActionListener {
    private JTextField txtBp,txtID,txtUsu,txtTitle,txtFecha;
    private JTextArea ACont; 
    private JComboBox Red=new JComboBox();
+   private PreparedStatement ps;
+   private ResultSet rs;
     //------------------------------------
+   
+   public  Connection getConnection(){
+          Connection con = null;
+     try {
+    
+            Class.forName("java.sql.Driver");
+             
+            con=(Connection) DriverManager.getConnection(URL,USERNAME,PASSWORD);
+              JOptionPane.showMessageDialog(this,"Conectado a la base de datos...");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Error:" + e);
+        }
+      
+     return con;
+    }
     
      public Publicacion(){
         
@@ -109,7 +129,7 @@ public class Publicacion extends JPanel implements ActionListener {
       ACont.setEditable(false);
       add(ACont);
       
-            //----------->>>>>>>>>Lista Desplegable<<<<<<<<<<<------------
+      //----------->>>>>>>>>Lista Desplegable<<<<<<<<<<<------------
       String[] Redes= {"Seleccione","Facebook","Instagram","Twitter"};
       
       Red=new JComboBox(Redes);
@@ -161,18 +181,20 @@ public class Publicacion extends JPanel implements ActionListener {
       add(BEliminar);
     
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
         
        if (ae.getSource()==BB){
            JOptionPane.showMessageDialog(this,"Encontrando Resultados de CI... "+txtBp.getText());
-           txtBp.setText(" ");
+           txtBp.setText("");
+           buscarPorCedula();
        }
        
        if (ae.getSource()==BID){
            JOptionPane.showMessageDialog(this,"Encontrando Resultados de ID... "+txtBp.getText());
-           txtID.setText(" ");
+           txtID.setText("");
+           //buscarPorId(txtID.getText());
        }
        
        if (ae.getSource()==BAnadir){
@@ -219,5 +241,46 @@ public class Publicacion extends JPanel implements ActionListener {
            
         
     }
+    
+    // ***********************  acciones crud  ****************************
+    private void buscarPorCedula(){
+        java.sql.Connection con = null;
+        try{
+            con = (java.sql.Connection) getConnection();
+            ps = con.prepareStatement("SELECT * FROM pu WHERE cedula = ?");
+            ps.setString(1,txtBp.getText() );
+            rs = ps.executeQuery();
+        
+      if(rs.first()){
+          do{
+              String[] valores = {
+                  rs.getString("Nombre_red"),
+                  rs.getString("Url"),
+              };
+          }while(rs.next());
+          // mostrar usuario
+          //mostrarUsuario(txtUsu, txtBr.getText(), false);
+          hacerEditable(true);
+      }else{
+      
+        JOptionPane.showMessageDialog(null,"No existen redes asociadas a esa cedula \n puedes agregarlas");
+        // mostrar usuario
+        //mostrarUsuario(txtUsu, txtBr.getText(), false);
+        // hacer editable para agregar redes a usuario
+        hacerEditable(true);
+      }
+       }catch(Exception e){
+       System.out.println("error " + e);
+       }
+    
+    }
+    
+    
+    
+    // hacer campos editables
+    private boolean hacerEditable(boolean visible){
+        return true;
+    }
+    
     
 }

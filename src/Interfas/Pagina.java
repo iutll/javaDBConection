@@ -17,7 +17,7 @@ public class Pagina extends JPanel implements ActionListener {
    private JButton BB,BAnadir,BGuardar,BModificar,BLimpiar,BEliminar;
    private JTextField txtBr,txtUsu,txtRed, txtUrl;
    private JTable AreaImpr;
-   public static final String URL = "jdbc:mysql://localhost:3306/Mini-Gestor";
+   public static final String URL = "jdbc:mysql://localhost:3306/mini-Gestor";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
    // id de la publicacion
