@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * @author jose-dasilva
- * @author Carlos Martínez
  */
 public class Pagina extends JPanel implements ActionListener {
     

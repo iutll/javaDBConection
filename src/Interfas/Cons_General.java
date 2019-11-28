@@ -207,7 +207,7 @@ public class Cons_General extends JPanel implements ActionListener{
        }
     }
     
-    // buscar prublicaciones
+    // buscar publicaciones
     private void buscarPublicaciones() {                                                     
         // TODO add your handling code here:
         java.sql.Connection con = null;
@@ -261,22 +261,17 @@ public class Cons_General extends JPanel implements ActionListener{
       // modelo de tabla nuevo
       DefaultTableModel tableModel = new DefaultTableModel();
       // valores del header de la tabla
-      String[] valores = {"id_redes", "twitter", "instagram", "facebook", "cedula"};
+      String[] valores = {"id_red", "nombre de la red", "url", "cedula"};
       // agregar header con valores a la tabla
       agregarHeaders(AreaImpr, tableModel, valores);
       
       
-           System.out.println("Base de datos de pagina");
-           System.out.println("");
-           System.out.println("id_pagina" +" " + "footer" +" "+ "enlace facebook" +" "+ "enlace instagram" +" "+ "enlace_twitter" + " " + "parrafo_pagina" + " " + "archivo_encabezado" + " " + "Titulo_encabezado");
       if(rs.first()){
           do{
-               System.out.println(rs.getInt("id_redes") +" " + rs.getString("twitter") + rs.getString("instagram") + rs.getString("facebook") + rs.getString("cedula") );
                String[] row = {
                    Integer.toString(rs.getInt("id_redes")),
-                   rs.getString("twitter"),
-                   rs.getString("instagram"),
-                   rs.getString("facebook"),
+                   rs.getString("Nombre_red"),
+                   rs.getString("Url"),
                    rs.getString("cedula")
                };
                // agregar nueva fila a la tabla

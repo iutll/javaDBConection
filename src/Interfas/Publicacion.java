@@ -7,11 +7,12 @@ import static Interfas.Pagina.USERNAME;
 import java.sql.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
-
+ 
 /**
- *
  * @author jose-dasilva
+ * @author Carlos Martínez
  */
 public class Publicacion extends JPanel implements ActionListener {
     
@@ -22,6 +23,7 @@ public class Publicacion extends JPanel implements ActionListener {
    private JComboBox Red=new JComboBox();
    private PreparedStatement ps;
    private ResultSet rs;
+   int ID_Publicacion;
     //------------------------------------
    
    public  Connection getConnection(){
@@ -130,11 +132,11 @@ public class Publicacion extends JPanel implements ActionListener {
       add(ACont);
       
       //----------->>>>>>>>>Lista Desplegable<<<<<<<<<<<------------
-      String[] Redes= {"Seleccione","Facebook","Instagram","Twitter"};
+      String[] Redes= {"busque su usuario primero"};
       
       Red=new JComboBox(Redes);
       Red.setBounds(120, 260, 140, 30);
-      Red.setSelectedItem("Seleccione"); //Selecciona el Primer Obj Mostrado
+      Red.setSelectedItem("busque su usuario primero"); //Selecciona el Primer Obj Mostrado
       add(Red);
       
       //----------->>>>>>>>>Botones<<<<<<<<<<<------------
@@ -187,99 +189,247 @@ public class Publicacion extends JPanel implements ActionListener {
         
        if (ae.getSource()==BB){
            JOptionPane.showMessageDialog(this,"Encontrando Resultados de CI... "+txtBp.getText());
-           txtBp.setText("");
-           buscarPorCedula();
+           buscarPorCedula(false, txtBp.getText());
+           //txtBp.setText("");
        }
        
        if (ae.getSource()==BID){
            JOptionPane.showMessageDialog(this,"Encontrando Resultados de ID... "+txtBp.getText());
-           txtID.setText("");
-           //buscarPorId(txtID.getText());
+           buscarPorId();
+           //txtID.setText("");
        }
+       
        
        if (ae.getSource()==BAnadir){
             JOptionPane.showMessageDialog(this,"Agrega Tus Datos... ");
-            ACont.setEditable(true);
-            txtTitle.setEditable(true);
-            txtFecha.setEditable(true);
+            hacerEditable(false);
+            crearPublicacion();
        }
+       
        
        if (ae.getSource()==BGuardar){
             JOptionPane.showMessageDialog(this,"Guardando... ");
-            ACont.setEditable(false);
-            txtTitle.setEditable(false);
-            txtFecha.setEditable(false);
-            
-    
+            modificarPublicacion();
+            hacerEditable(false);
         }
         if (ae.getSource()==BModificar){
             JOptionPane.showMessageDialog(this,"Modifica la Publicación... ");
-            ACont.setEditable(true);
-            txtTitle.setEditable(true);
-            txtFecha.setEditable(true);
-            
-            
+            hacerEditable(true);
         }
         if (ae.getSource()==BLimpiar){
             JOptionPane.showMessageDialog(this,"Limpiando... ");
-            txtUsu.setText(" ");
-            txtTitle.setText(" ");
-            ACont.setText(" ");
-            txtFecha.setText(" ");
-            ACont.setEditable(false);
-            txtTitle.setEditable(false);
-            txtFecha.setEditable(false);
+            txtUsu.setText("");
+            txtTitle.setText("");
+            ACont.setText("");
+            txtFecha.setText("");
+            txtBp.setText("");
+            txtID.setText("");
+            hacerEditable(false);
+            Red.removeAllItems();
+            Red.addItem("seleccione red");
             
         }
         if (ae.getSource()==BEliminar){
             JOptionPane.showMessageDialog(this,"Eliminando... ");
-            ACont.setEditable(false);
-            txtTitle.setEditable(false);
-            txtFecha.setEditable(false);
-            
+            hacerEditable(false);   
+            borrarPublicacion();
         }
            
         
     }
     
     // ***********************  acciones crud  ****************************
-    private void buscarPorCedula(){
+    // buscar por cedula las redes sociales que estan asociadas a ese usuario
+    // se necesitan al menos 1 red social para hacer publicaciones
+    private ArrayList<String> buscarPorCedula(boolean justGetValues, String cedula){
         java.sql.Connection con = null;
         try{
+            // buscar que tenga redes sociales agregadas
             con = (java.sql.Connection) getConnection();
-            ps = con.prepareStatement("SELECT * FROM pu WHERE cedula = ?");
-            ps.setString(1,txtBp.getText() );
+            ps = con.prepareStatement("SELECT * FROM redessociales WHERE cedula = ?");            
+            ps.setString(1, cedula );
             rs = ps.executeQuery();
-        
+      
+      // tiene redes sociales
       if(rs.first()){
+          // valores predeterminados del JComboBox
+          Red.removeAllItems();
+          Red.addItem("seleccione red");
+          Red.setSelectedItem("seleccione red");
+          // hacer nombre de usuario visible 
+         if(!justGetValues) {
+             txtUsu.setText(rs.getString("usuario"));
+             hacerEditable(true);
+         }
+         // array para guardar redes
+          ArrayList<String> redesUser = new ArrayList<>();
           do{
-              String[] valores = {
-                  rs.getString("Nombre_red"),
-                  rs.getString("Url"),
-              };
+              // añadir redes registradas
+              Red.addItem( rs.getString("Nombre_red") );
+              redesUser.add(rs.getString("Nombre_red"));
           }while(rs.next());
-          // mostrar usuario
-          //mostrarUsuario(txtUsu, txtBr.getText(), false);
-          hacerEditable(true);
+          
+          return redesUser;
       }else{
       
-        JOptionPane.showMessageDialog(null,"No existen redes asociadas a esa cedula \n puedes agregarlas");
-        // mostrar usuario
-        //mostrarUsuario(txtUsu, txtBr.getText(), false);
-        // hacer editable para agregar redes a usuario
-        hacerEditable(true);
+        if(!cedula.equals("")) JOptionPane.showMessageDialog(null,"No existen redes asociadas a esa cedula \n debe agregar al menos una \n para poder hacer una publicación");
+        else JOptionPane.showMessageDialog(null,"ingrese una cedula por favor");
       }
        }catch(Exception e){
        System.out.println("error " + e);
        }
+       return null;
     
     }
     
+    // buscar publicacion por id
+    private void buscarPorId(){
+        java.sql.Connection con = null;
+        try{
+            con = (java.sql.Connection) getConnection();
+            ps = con.prepareStatement("SELECT * FROM publicacion WHERE id_publicacion = ?");            
+            ps.setString(1,txtID.getText() );
+            rs = ps.executeQuery();
+      
+      // existe dicha publicacion
+      if(rs.first()){
+          txtBp.setText(rs.getString("cedulauser"));
+          txtUsu.setText(rs.getString("usuario"));
+          txtFecha.setText(rs.getDate("fecha").toString() );
+          ACont.setText(rs.getString("contenido"));
+          txtTitle.setText(rs.getString("titulo"));
+          ID_Publicacion = rs.getInt("id_publicacion");
+          
+          // opciones dinamicas
+          makeJComboBoxDinamic(rs.getString("cedulauser"), rs.getString("red_publicada") );
+          hacerEditable(false);
+          
+      }else{
+      
+        JOptionPane.showMessageDialog(null,"No existe publicación asociada a ese id");
+      }
+       }catch(Exception e){
+       System.out.println("error " + e);
+       }
+    }
+    
+    // crear publicacion
+    private void crearPublicacion(){
+        java.sql.Connection con = null;
+        // no ha seleccionado una red donde publicar, necesita seleccionar una
+        if(Red.getSelectedItem().toString().equals("seleccione red") || Red.getSelectedItem().toString().equals("busque su usuario primero") ){
+           JOptionPane.showMessageDialog(null,"no ha seleccionado una red donde publicar, necesita seleccionar una");
+        }
+        // selecciono una red
+        else{
+                try{
+                    con = (java.sql.Connection) getConnection();
+                    ps = con.prepareStatement("INSERT INTO publicacion (titulo, cedulauser, contenido, fecha, usuario, red_publicada) VALUES (?,?,?,?,?,?)");            
+                    ps.setString(1,txtTitle.getText() );
+                    ps.setString(2,txtBp.getText() );
+                    ps.setString(3,ACont.getText() );
+                    ps.setString(4, txtFecha.getText()  );
+                    ps.setString(5,txtUsu.getText() );
+                    ps.setString(6, Red.getSelectedItem().toString() );
+                    int creado = ps.executeUpdate();
+
+                    // existe dicha publicacion
+                    if(creado > 0 ){
+                        JOptionPane.showMessageDialog(null,"publicacion creada");
+
+                    }else{
+
+                      JOptionPane.showMessageDialog(null,"No se ha podido crear la publicacion");
+                    }
+                     }catch(Exception e){
+                     System.out.println("error " + e);
+                     }
+        }
+        
+    }
+    
+    // modificar
+    private void modificarPublicacion(){
+        java.sql.Connection con = null;
+        // no ha seleccionado una red donde publicar, necesita seleccionar una
+        if(Red.getSelectedItem().toString().equals("seleccione red") || Red.getSelectedItem().toString().equals("busque su usuario primero") ){
+           JOptionPane.showMessageDialog(null,"no ha seleccionado una red donde publicar, necesita seleccionar una");
+        }
+        // selecciono una red
+        else{
+                try{
+                    con = (java.sql.Connection) getConnection();
+                    ps = con.prepareStatement("UPDATE publicacion SET titulo = ?, contenido = ?, fecha = ?, red_publicada = ? WHERE id_publicacion = ?");            
+                    ps.setString(1,txtTitle.getText() );
+                    ps.setString(2,ACont.getText() );
+                    ps.setString(3, txtFecha.getText()  );
+                    ps.setString(4, Red.getSelectedItem().toString() );
+                    ps.setInt(5, ID_Publicacion );
+                    int creado = ps.executeUpdate();
+                    
+                    System.out.println("el pinche id de publicacion " + Integer.toString(ID_Publicacion) );
+
+                    // existe dicha publicacion
+                    if(creado > 0 ){
+                        JOptionPane.showMessageDialog(null,"publicacion actualizada");
+
+                    }else{
+
+                      JOptionPane.showMessageDialog(null,"No se ha podido actualizar la publicacion");
+                    }
+                     }catch(Exception e){
+                     System.out.println("error " + e);
+                     }
+        }
+        
+    }
+    
+    // borrar publicacion
+    private void borrarPublicacion(){
+        java.sql.Connection con = null;
+        
+    try{
+        con = (java.sql.Connection) getConnection();
+        ps = con.prepareStatement("DELETE FROM publicacion WHERE id_publicacion = ?");            
+        ps.setString(1, Integer.toString(ID_Publicacion) );
+        int borrado = ps.executeUpdate();
+
+        // existe dicha publicacion
+        if(borrado > 0 ){
+            JOptionPane.showMessageDialog(null,"publicacion eliminada");
+
+        }else{
+          JOptionPane.showMessageDialog(null,"No se ha podido eliminar la publicacion");
+        }
+         }catch(Exception e){
+         System.out.println("error " + e);
+         }
+
+    }
+    
+    
+    // ############### makeJComboBoxDinamic, hacer que el JComboBox tenga opciones dependiendo de ciertos parametros ##########
+    private void makeJComboBoxDinamic(String cedula, String redUsada){
+        // valores predeterminados del JComboBox
+          
+          ArrayList<String> redesUser = buscarPorCedula(true, cedula);
+          Red.removeAllItems();
+          Red.addItem("seleccione red");
+          
+          for(String s : redesUser){
+              Red.addItem(s);
+          }
+          
+          Red.setSelectedItem(redUsada);
+      
+    }
     
     
     // hacer campos editables
-    private boolean hacerEditable(boolean visible){
-        return true;
+    private void hacerEditable(boolean editable){
+        txtTitle.setEditable(editable);
+        txtFecha.setEditable(editable);
+        ACont.setEditable(editable);
     }
     
     
