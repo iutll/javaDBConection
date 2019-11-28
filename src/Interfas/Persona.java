@@ -17,7 +17,7 @@ public class Persona extends JPanel implements ActionListener {
    private JTextField txtUsu,txtMail,txtClv,txtCI;
    public int ID_user;
    private JComboBox ListNivel;
-   public static final String URL = "jdbc:mysql://localhost:3306/Mini-Gestor";
+   public static final String URL = "jdbc:mysql://localhost:3306/mini-Gestor";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
    PreparedStatement ps;

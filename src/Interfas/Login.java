@@ -28,7 +28,7 @@ public class Login extends JFrame implements ActionListener{
      private JMenuItem Busq_G,Man_Usu,Man_Publi,Man_Pag,cred,exit,Principio; //Accion de Barra Menu
      private int intentos=0;
      private boolean v=false;
-   public static final String URL = "jdbc:mysql://localhost:3306/Mini-Gestor";
+   public static final String URL = "jdbc:mysql://localhost:3306/mini-Gestor";
    public static final String USERNAME = "root";
    public static final String PASSWORD = "";
         //-------------------->>>>>>>Instancias de Clases<<<<<<<<<--------------------------------
