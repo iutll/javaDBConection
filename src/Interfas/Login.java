@@ -241,7 +241,7 @@ public class Login extends JFrame implements ActionListener{
         
          if ((ae.getSource()==cred)||(ae.getSource()==Mp.credi)){
         JOptionPane.showMessageDialog(this,"--->>>Creditos<<<---"
-       + "\n\n@José Angel Da Silva 27.541.303 \n@Edsel Rengifo 26.846.962");
+       + "\n\n@José Angel Da Silva 27.541.303 \n@Edsel Rengifo 26.846.962 \n\n Carlos Martínez 26.717.488");
         }
         
         if ((ae.getSource()==exit)||(ae.getSource()==Mp.cerrar)){
